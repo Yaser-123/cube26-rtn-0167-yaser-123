@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Returns Manager · API</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand"><strong>Returns Manager</strong><span>Step 4 of 5 · Customer returns</span></div>
+            <nav class="nav">
+                <a href="/">Inspect a return</a>
+                <a href="/#history">History</a>
+                <a href="/developers" class="active">API</a>
+                <a href="/label">Accuracy testing</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-title">
+            <h1>Inspection API</h1>
+            <p class="muted">Send photos of a returned item and the SKU that was ordered. You get back the decision and the evidence for it.</p>
+        </div>
+
+        <div class="grid-2">
+            <section class="card doc">
+                <h2>Endpoint</h2>
+                <pre class="code">POST /api/v1/inspect
+Header:  X-API-Key: &lt;your key&gt;
+Body:    multipart/form-data</pre>
+
+                <h2>Form fields</h2>
+                <table>
+                    <thead><tr><th>Field</th><th>Required</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>images</code></td><td>yes</td><td>1–3 photos (JPEG, PNG, WebP, GIF), each under 10 MB. Repeat the field for each photo.</td></tr>
+                        <tr><td><code>sku</code></td><td>yes</td><td>The ordered SKU, e.g. <code>SKU-BOTTLE-750</code>.</td></tr>
+                        <tr><td><code>parts</code></td><td>no</td><td>Expected parts, separated by <code>;</code>. Defaults to the catalogue entry, and required for SKUs not in the catalogue.</td></tr>
+                        <tr><td><code>unit_id</code></td><td>no</td><td>Your ID for this unit. Generated if omitted.</td></tr>
+                        <tr><td><code>order_id</code>, <code>asin</code></td><td>no</td><td>Stored with the record.</td></tr>
+                    </tbody>
+                </table>
+
+                <h2>Example</h2>
+                <div class="tabs" id="tabs">
+                    <button type="button" class="active" data-t="curl">curl</button>
+                    <button type="button" data-t="python">Python</button>
+                    <button type="button" data-t="js">JavaScript</button>
+                </div>
+                <pre class="code" id="code-curl">curl -X POST <span class="origin"></span>/api/v1/inspect \
+  -H "X-API-Key: YOUR_KEY" \
+  -F "sku=SKU-BOTTLE-750" \
+  -F "images=@front.jpg" \
+  -F "images=@side.jpg"</pre>
+                <pre class="code hidden" id="code-python">import requests
+
+with open("front.jpg", "rb") as front, open("side.jpg", "rb") as side:
+    r = requests.post(
+        "<span class="origin"></span>/api/v1/inspect",
+        headers={"X-API-Key": "YOUR_KEY"},
+        data={"sku": "SKU-BOTTLE-750"},
+        files=[("images", front), ("images", side)],
+    )
+r.raise_for_status()
+record = r.json()
+print(record["outcome"], [(c["check_key"], c["verdict"]) for c in record["checks"]])</pre>
+                <pre class="code hidden" id="code-js">const form = new FormData();
+form.append("sku", "SKU-BOTTLE-750");
+for (const file of fileInput.files) form.append("images", file);
+
+const res = await fetch("<span class="origin"></span>/api/v1/inspect", {
+  method: "POST",
+  headers: { "X-API-Key": "YOUR_KEY" },
+  body: form,
+});
+const record = await res.json();</pre>
+
+                <h2>Other endpoints</h2>
+                <ul>
+                    <li><code>GET /api/v1/catalog</code>: known SKUs, descriptions and expected parts (no key needed).</li>
+                    <li><a href="/docs">Interactive reference</a>: try every endpoint from the browser.</li>
+                </ul>
+            </section>
+
+            <section class="card doc">
+                <h2>Response</h2>
+                <p>An evidence record. <code>outcome</code> is the decision, and each check says what was verified and why.</p>
+                <pre class="code">{
+  "record_id": "RTN-3F2A9C1B",
+  "schema_version": "1.0",
+  "organization_id": "org_demo_alpha",
+  "subject": "API-8D41E0AA",
+  "captured_at": "2026-09-30T18:02:11+00:00",
+  "images": ["upload:sha256:9b1c..."],
+  "checks": [
+    { "check_key": "identity", "verdict": "PASS", "confidence": 0.85,
+      "detail": "Insulated steel bottle with screw lid, matches the catalogue." },
+    { "check_key": "completeness", "verdict": "FAIL", "confidence": 0.92,
+      "detail": "Threaded neck exposed, no lid in view. Missing: lid." },
+    { "check_key": "condition", "verdict": "PASS", "confidence": 0.75,
+      "detail": "Used - Like New (observed: opened_unused). No visible wear." }
+  ],
+  "outcome": "refurbish",
+  "overrides": [],
+  "status": "completed",
+  "content_hash": "4be1..."
+}</pre>
+
+                <h2>Decisions</h2>
+                <ul>
+                    <li><b>restock</b>: New or Like New, complete</li>
+                    <li><b>refurbish</b>: light wear, or a sound item missing a part</li>
+                    <li><b>liquidate</b>: heavy wear</li>
+                    <li><b>dispose</b>: broken or heavily damaged</li>
+                    <li><b>pending_review</b>: wrong item, or something couldn't be verified from the photos</li>
+                </ul>
+
+                <h2>Errors and limits</h2>
+                <ul>
+                    <li><code>401</code>: missing or wrong API key</li>
+                    <li><code>400</code> / <code>413</code> / <code>415</code>: wrong number of images, too large, or not an image</li>
+                    <li><code>429</code>: too many requests; wait for the <code>Retry-After</code> seconds</li>
+                    <li>If the vision model is down or the daily budget is used up, you still get a record back, with <code>pending_review</code> and the reason in each check. Nothing is lost.</li>
+                </ul>
+                <p class="small">Each key belongs to one client account and can only see that account's records. Ask the operator for a key.</p>
+            </section>
+        </div>
+    </main>
+    <script>
+        document.querySelectorAll('.origin').forEach(el => el.textContent = location.origin);
+        document.querySelectorAll('#tabs button').forEach(b => b.addEventListener('click', () => {
+            document.querySelectorAll('#tabs button').forEach(x => x.classList.toggle('active', x === b));
+            ['curl', 'python', 'js'].forEach(t => document.getElementById(`code-${t}`).classList.toggle('hidden', t !== b.dataset.t));
+        }));
+    </script>
+</body>
+</html>

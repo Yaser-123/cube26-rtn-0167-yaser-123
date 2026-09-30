@@ -1,0 +1,6 @@
+unit_id,org_id,ordered_sku,parts_list,photo_refs,identity_a,completeness_a,condition_a,disposition_a,identity_b,completeness_b,condition_b,disposition_b
+EVAL-001,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,test_images/test_new_sealed_1790418156479.jpg,,,,,,,,
+EVAL-002,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,test_images/test_used_bottle_1790418109421.jpg,,,,,,,,
+EVAL-003,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,test_images/test_missing_lid_1790418125316.jpg,,,,,,,,
+EVAL-004,org_demo_bravo,SKU-BOTTLE-750,bottle;lid,test_images/test_closed_box_1790418142766.jpg,,,,,,,,
+EVAL-005,org_demo_bravo,SKU-PUZZLE-500,puzzle pieces;poster,test_images/damaged_puzzle.jpg,,,,,,,,

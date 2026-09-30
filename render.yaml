@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: returns-manager
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ANTHROPIC_WORKSPACE_ID
+        sync: false
+      - key: RTN_MODEL
+        value: claude-opus-5-5
+      - key: RTN_EFFORT
+        value: low
+      - key: RTN_API_KEYS
+        sync: false
+      - key: RTN_DAILY_CALL_CAP
+        value: "300"

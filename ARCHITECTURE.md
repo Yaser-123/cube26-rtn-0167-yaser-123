@@ -2,33 +2,60 @@
 
 ## Overview
 
-The Returns Manager is a FastAPI-based AI proxy agent that processes simulated visual and text evidence to determine the disposition of a returned item. It satisfies the requirement of structured, consistent, and evidence-backed decision making in the Cube Buildathon.
+A FastAPI service with a browser UI. One vision-model call per returned unit produces three independent check verdicts. Deterministic code turns those into a disposition, and the result is written as an Evidence Record in the official contract shape.
 
-## Core Components
+```text
+Browser (drag/drop or camera)
+  └─ downscale to 1024px, send as data URL ─┐
+                                            ▼
+FastAPI  src/main.py
+  ├─ tenant check: x-org-id == organization_id
+  ├─ ReturnsAgent.process()                 src/agent.py
+  │    ├─ decode + resize images (≤3, 1024px)
+  │    ├─ disk cache lookup (hash of org, model, effort, prompt version, SKU, parts, image bytes)
+  │    ├─ Claude messages API: images + SKU + parts → strict JSON schema
+  │    ├─ fail open on any error → all UNCERTAIN, pending_review
+  │    └─ decide_disposition() → outcome
+  └─ records_db[org_id][record_id]  (in-memory, tenant-partitioned)
+```
 
-1.  **FastAPI Application (`src/main.py`)**
-    *   Exposes endpoints for processing single returns (`/api/v1/returns/process`) and batched returns (`/api/v1/returns/process-batch`).
-    *   Enforces **Tenancy Isolation** strictly via `x-org-id` headers.
+## Key decisions and trade-offs
 
-2.  **Returns Agent (`src/agent.py`)**
-    *   Simulates an LLM Vision processing pipeline.
-    *   Evaluates Identity, Completeness, and Condition (using the standard Amazon scale).
-    *   Implements **Fail Open** principles. If the simulated evidence is poor or "blurry", the agent degrades gracefully to an `UNCERTAIN` state and moves the disposition to `pending_review`.
+**One batched call, three verdicts.** Identity, completeness and condition all come from the same photos, so one call covers them. Three separate calls would triple the image tokens, which dominate the cost. The trade-off is that one bad response affects all three checks. The strict JSON schema (`output_config.format`) removes parsing failures, and any API failure fails open.
 
-3.  **Data Models (`src/models.py`)**
-    *   Implements the official Evidence Contract using `pydantic`.
-    *   Ensures that every record produced includes exactly what downstream consumers (like the Recovery Manager) expect (`record_id`, `schema_version`, `checks`, `content_hash`, etc.).
+**Per-check UNCERTAIN.** The model returns PASS/FAIL/UNCERTAIN for each check rather than one "needs more images" flag. A plain shipping carton can be identity-UNCERTAIN, and a clearly visible bottle with exposed threads can be completeness-FAIL without asking for more photos. Any UNCERTAIN routes to `pending_review`.
 
-## Engineering Decisions
+**Identity against the seller catalogue.** The model gets the SKU's catalogue description (`src/catalog.py`), not just the code, so an unbranded bottle can pass while a label reading "1L" fails a 750 ml SKU. An SKU with no catalogue entry is never allowed to PASS identity; code downgrades it to UNCERTAIN.
 
-*   **Tenancy Isolation:** Implemented at the API boundary. The model itself never crosses tenant contexts because the API layer rejects requests that try to process a unit_id outside of the caller's authorized tenant namespace.
-*   **Batch Model Calls:** The `/process-batch` endpoint takes an array of items, which in a real LLM deployment would be batched into a single large prompt or parallelized inference queue to minimize latency.
-*   **Handling Uncertainty:** The code explicitly checks for low-confidence conditions. Instead of forcing a guess (which causes false positives), it marks the check as `UNCERTAIN`.
+**Eval labelling tool.** `/label` lets two people build and label the held-out set. Each labeller's API view only contains their own columns, so labels stay independent. Images are served only from the fixture folders, never from arbitrary paths in the CSV.
+
+**Code decides the disposition.** The model only grades. `decide_disposition()` is a small, tested table. That keeps outcomes consistent and auditable, and it means the policy can change without re-prompting. A wrong item (identity FAIL) goes to review, never to `dispose`, because the item might belong to someone else and is a Recovery claim.
+
+**Model choice.** The default is `claude-opus-5-5` at effort `low`: the most capable current model, with a low thinking budget, since this is a short grading task. It's configurable through `RTN_MODEL` / `RTN_EFFORT`. The eval report should compare against `claude-sonnet-5-5` before settling on a production default. A server-side refusal fallback (`fallbacks: "default"`) re-runs a declined request on another model instead of losing the case.
+
+**Cost.** Image tokens dominate. The levers, in order of impact:
+1. The 1024px cap (about half the tokens of full resolution)
+2. At most 3 images
+3. One call per unit
+4. The content-hash cache, so re-submissions and eval re-runs cost $0
+5. Low effort
+6. No call at all without a readable image
+
+Each call's token usage, USD cost and latency are recorded and aggregated by `eval.py`.
+
+**Tenancy.** Records live in `records_db[org_id]`, and every read path goes through the caller's partition. Guessing another tenant's `record_id` returns 404, the same as a missing record. Uploaded images are not persisted or served. The record stores `upload:sha256:<prefix>` as a reference, so there is no shared image path to guess. The cache key includes `organization_id`, so cached results are never shared across tenants. `x-org-id` stands in for real authentication in this demo; production would derive the tenant from an auth token.
+
+**Evidence record.** It has every field in the official contract. `model_version` on each check is the actual model ID. `content_hash` is SHA-256 over the canonical JSON of the record minus the hash. It detects changes but isn't signed or anchored, so it doesn't make records tamper-proof. Overrides append history and recompute the hash, and the agent's original checks are preserved.
+
+## Known limitations
+
+- The store is in-memory, so records vanish on restart. Production would use Postgres with row-level security per org.
+- Images arrive as base64 JSON. Production would use multipart or presigned object-store uploads with per-tenant buckets.
+- The condition definitions are paraphrased from Amazon's Condition Guidelines and should be re-checked against the live page per category.
+- Evaluation numbers are pending the 50-unit two-labeller set (see README).
 
 ## Dependencies
-*   Python 3.10+
-*   FastAPI
-*   Pydantic
+Python 3.10+, FastAPI, Pydantic, Anthropic Python SDK, Pillow, python-dotenv.
 
 ## Security
-No secrets are committed. Tenant IDs act as a mock authorization mechanism in this environment.
+No secrets in the repository: `.env` is git-ignored, and `.env.example` holds placeholders. Model output shown in the UI is HTML-escaped.

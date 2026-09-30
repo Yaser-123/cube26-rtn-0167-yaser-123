@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Returns Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand"><strong>Returns Manager</strong><span>Step 4 of 5 · Customer returns</span></div>
+            <nav class="nav">
+                <a href="/" class="active">Inspect a return</a>
+                <a href="#history">History</a>
+                <a href="/developers">API</a>
+                <a href="/label">Accuracy testing</a>
+            </nav>
+            <label class="account" title="Each client's returns are stored separately. Switching shows only that client's history.">
+                Client account
+                <select id="orgSelect"></select>
+            </label>
+        </div>
+    </header>
+
+    <main class="container">
+        <details class="card guide" id="guide" open>
+            <summary>How to use</summary>
+            <div class="steps">
+                <div class="step"><div class="step-num">1</div><div><b>Enter the Unit ID</b>From the return label. If the order is on file, the product and parts fill in by themselves.</div></div>
+                <div class="step"><div class="step-num">2</div><div><b>Add 1–3 photos</b>Show the whole item out of its box, plus close-ups of damage or empty slots.</div></div>
+                <div class="step"><div class="step-num">3</div><div><b>Inspect</b>The agent checks identity, completeness and condition, then picks what happens next.</div></div>
+                <div class="step"><div class="step-num">4</div><div><b>Review</b>Read the reasons. If you disagree, use <i>Change decision</i>. Your reason is saved with the record.</div></div>
+            </div>
+        </details>
+
+        <div class="grid-2 section">
+            <section class="card">
+                <h2>Returned item</h2>
+                <form id="returnForm">
+                    <div class="field">
+                        <label for="unitId">Unit ID</label>
+                        <input type="text" id="unitId" placeholder="e.g. UNIT-0018" autocomplete="off" required>
+                        <div class="hint" id="unitHint">From the return label. If we have the order, the product and parts fill in automatically.</div>
+                    </div>
+                    <div class="field">
+                        <label for="sku">Ordered product (SKU)</label>
+                        <input type="text" id="sku" list="skuList" placeholder="Type or pick, e.g. SKU-BOTTLE-750" autocomplete="off" required>
+                        <datalist id="skuList"></datalist>
+                        <div class="sku-desc" id="skuDesc"></div>
+                    </div>
+                    <div class="field">
+                        <label for="parts">Parts that should be in the box</label>
+                        <input type="text" id="parts" required>
+                        <div class="hint">Filled in from the catalogue. Separate parts with a semicolon, e.g. <code>lamp;usb cable;manual</code></div>
+                    </div>
+
+                    <div class="field">
+                        <label>Photos</label>
+                        <div class="dropzone" id="uploadZone">
+                            <p>Drop photos here or click to choose</p>
+                            <span>Up to 3 images · JPG, PNG or WebP</span>
+                            <input type="file" id="fileInput" multiple accept="image/*">
+                        </div>
+                        <div id="imagePreview" class="previews"></div>
+                    </div>
+                    <div class="btn-row">
+                        <button type="button" id="cameraBtn" class="btn">Use camera</button>
+                        <button type="button" id="clearBtn" class="btn">Clear photos</button>
+                    </div>
+                    <input type="file" id="cameraInput" accept="image/*" capture="environment" class="hidden">
+
+                    <button type="submit" id="submitBtn" class="btn btn-primary">
+                        <span id="submitLabel">Inspect return</span>
+                        <div class="spinner"></div>
+                    </button>
+                </form>
+            </section>
+
+            <section class="card" id="resultsPanel">
+                <div class="empty" id="emptyState">
+                    <h3>No inspection yet</h3>
+                    <p>Fill in the form and add photos. The result will show:</p>
+                    <ul>
+                        <li>what should happen to the item next</li>
+                        <li>whether it's the right item, complete, and its condition</li>
+                        <li>the evidence behind each answer</li>
+                    </ul>
+                </div>
+
+                <div class="hidden" id="resultsContent">
+                    <div class="decision">
+                        <div>
+                            <div class="decision-label">Decision</div>
+                            <div class="decision-value" id="dispositionBadge"></div>
+                            <div class="decision-help" id="dispositionHelp"></div>
+                        </div>
+                        <button type="button" id="overrideBtn" class="btn">Change decision</button>
+                    </div>
+
+                    <div id="notes"></div>
+                    <div id="checksGrid"></div>
+
+                    <div class="legend">
+                        <span><span class="pill pass">PASS</span> photos confirm it</span>
+                        <span><span class="pill fail">FAIL</span> photos show a problem</span>
+                        <span><span class="pill uncertain">UNCERTAIN</span> can't tell from the photos</span>
+                    </div>
+
+                    <details class="meta">
+                        <summary>Record details</summary>
+                        <dl>
+                            <dt>Record ID</dt><dd id="recordId"></dd>
+                            <dt>Captured</dt><dd id="capturedAt"></dd>
+                            <dt>Model</dt><dd id="modelVersion"></dd>
+                            <dt>Content hash</dt><dd id="contentHash"></dd>
+                        </dl>
+                        <pre class="json-view" id="jsonView"></pre>
+                    </details>
+                </div>
+            </section>
+        </div>
+
+        <section class="card section" id="history">
+            <h2>History · <span id="recordsOrg"></span></h2>
+            <p class="muted" style="margin:-0.5rem 0 0.75rem">Inspections for the selected client account only. Click a row to open it.</p>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Time</th><th>Unit</th><th>Identity</th><th>Complete</th><th>Condition</th><th>Decision</th><th>Record</th></tr></thead>
+                    <tbody id="recordsBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <div id="accountModal" class="modal hidden">
+            <div class="card">
+                <h2>Add client account</h2>
+                <div id="accountForm">
+                    <p class="muted" style="margin-bottom:1rem">Each client's returns, history and API access are kept separate from every other client.</p>
+                    <div class="field">
+                        <label for="accountName">Client name</label>
+                        <input type="text" id="accountName" placeholder="e.g. Sunrise Home Store">
+                    </div>
+                    <div class="btn-row">
+                        <button type="button" id="cancelAccountBtn" class="btn">Cancel</button>
+                        <button type="button" id="createAccountBtn" class="btn btn-primary">Create account</button>
+                    </div>
+                </div>
+                <div id="accountDone" class="hidden">
+                    <p style="margin-bottom:0.75rem"><b id="accountDoneName"></b> is ready and selected.</p>
+                    <div class="field">
+                        <label>API key for this client</label>
+                        <input type="text" id="accountKey" readonly>
+                        <div class="hint">Copy it now. It is shown only once. Use it as <code>X-API-Key</code> with the <a href="/developers">inspection API</a>.</div>
+                    </div>
+                    <button type="button" id="closeAccountBtn" class="btn btn-primary">Done</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="overrideModal" class="modal hidden">
+            <div class="card">
+                <h2>Change decision</h2>
+                <p class="muted" style="margin-bottom:1rem">The agent's original decision and checks are kept. Your change and reason are added to the record.</p>
+                <div class="field">
+                    <label for="overrideVerdict">New decision</label>
+                    <select id="overrideVerdict">
+                        <option value="restock">Restock</option>
+                        <option value="refurbish">Refurbish</option>
+                        <option value="liquidate">Liquidate</option>
+                        <option value="dispose">Dispose</option>
+                        <option value="pending_review">Needs review</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="overrideReason">Reason</label>
+                    <input type="text" id="overrideReason" placeholder="e.g. Scratch on the back not visible in photos">
+                </div>
+                <div class="btn-row">
+                    <button type="button" id="cancelOverrideBtn" class="btn">Cancel</button>
+                    <button type="button" id="submitOverrideBtn" class="btn btn-primary">Save change</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/static/app.js"></script>
+</body>
+</html>
