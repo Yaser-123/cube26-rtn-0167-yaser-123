@@ -216,7 +216,7 @@ From `data/returns_sample.csv` (synthetic):
 
 The `Dockerfile` and `render.yaml` are included. On Render: create a *Blueprint* from this repo, then set `ANTHROPIC_API_KEY` (and `ANTHROPIC_WORKSPACE_ID` if needed) in the dashboard. The health check is `/health`. The free tier's disk is ephemeral, so records and new eval labels reset on redeploy. Do the labelling locally.
 
-Deployment URL: [placeholder]
+Deployment URL: https://returns-manager-390y.onrender.com
 
 ## Submission checklist (from the problem statement)
 
@@ -230,7 +230,7 @@ Deployment URL: [placeholder]
 | Evaluation completed (50 units, 2 labellers) | ✅ `eval/eval-report.md` · identity 88% · completeness 87.5% · condition 96% · FP=0 |
 | Failure modes documented | ✅ 3 patterns identified in `eval/eval-report.md` |
 | Demo video | ⏳ script in `docs/DEMO_SCRIPT.md` |
-| Deployment URL | ⏳ `render.yaml` ready |
+| Deployment URL | ✅ https://returns-manager-390y.onrender.com |
 | LinkedIn post tagging CodeQuesters and Sydon.AI | ⏳ draft in `docs/LINKEDIN_POST.md` |
 
 ## Video Demo
