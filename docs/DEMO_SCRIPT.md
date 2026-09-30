@@ -1,22 +1,35 @@
-# Demo Video Script — Returns Manager
-# Target: 4–5 minutes · record at https://returns-manager-390y.onrender.com
+# Returns Manager — Demo Script (Rewritten)
+# 4:30 target · business + tech · story-driven
+
+---
+
+## THE CORE STORY TO TELL
+
+Business hook: Wrong return decisions cost money in both directions.
+Pass a damaged item → angry buyer, costly reverse logistics.
+Reject a good item → money left on the table.
+The agent solves this with a feedback loop that gets smarter over time.
+
+Three acts:
+  ACT 1 — The problem + live demo (show the magic)
+  ACT 2 — How it actually works (earn the trust)
+  ACT 3 — It learns (the future angle / why this compounds)
 
 ---
 
 ## BEFORE YOU RECORD
 
-Open these tabs in advance:
-1. https://returns-manager-390y.onrender.com  (operator UI)
-2. https://returns-manager-390y.onrender.com/developers  (API docs)
-3. https://returns-manager-390y.onrender.com/label  (eval labelling tool)
-4. A terminal with the project folder open
-5. eval/eval-report.md open in VS Code
+Have these open and ready:
+- Tab 1: https://returns-manager-390y.onrender.com  (set to Alpha Retail)
+- Tab 2: eval/eval-report.md in VS Code
+- Terminal: cd into the project folder
+- Images to upload (drag-and-drop order):
+    1. test_images/test_used_bottle_1790418109421.jpg
+    2. test_images/test_missing_lid_1790418125316.jpg
+    3. test_images/test_new_sealed_1790418156479.jpg
+    4. test_images/test_closed_box_1790418142766.jpg
 
-Have these images ready to upload:
-- test_images/test_used_bottle_1790418109421.jpg
-- test_images/test_missing_lid_1790418125316.jpg
-- test_images/test_new_sealed_1790418156479.jpg
-- test_images/test_closed_box_1790418142766.jpg
+Wake up Render 30 seconds before hitting record (free tier sleeps).
 
 ---
 
@@ -24,179 +37,186 @@ Have these images ready to upload:
 
 ---
 
-### 00:00 — HOOK (15 seconds)
+### ACT 1 — THE PROBLEM IS EXPENSIVE (0:00–0:20)
 
-**[Show: the live deployed URL in browser]**
+**[Open with the operator UI already on screen — not a title card]**
 
-> "Every returned parcel on Amazon needs four answers before anything can happen to it:
-> Is this actually the product we sold? Is it complete? What condition is it in?
-> And what do we do with it — restock, refurbish, liquidate, or dispose?
-> A human doing this manually takes 3 to 5 minutes per item.
-> This agent does it in one photo and one API call."
-
----
-
-### 00:15 — ARCHITECTURE IN 30 SECONDS
-
-**[Show: README.md — the "How it works" diagram section]**
-
-> "The design is simple on purpose. Up to three photos go in. There is exactly one call
-> to Claude — claude-opus-5-5 — which returns a strict JSON schema with three verdicts:
-> identity, completeness, and condition. Each verdict is PASS, FAIL, or UNCERTAIN.
-> After that, a deterministic policy in code — not the model — decides the disposition.
-> The model grades. The code decides. The model can never auto-dispose a wrong item."
-
-**[Point at the disposition policy table]**
-
-> "If anything is UNCERTAIN, the unit goes to human review.
-> Zero false positives is the hard constraint.
-> The agent must never pass something humans would fail."
+> "Amazon processes over a million returns a day.
+> Every single one needs the same four questions answered:
+> Right product? Complete? What condition? What do we do with it?
+> Get it wrong in one direction — you restock a damaged item and an angry buyer
+> leaves a one-star review. Get it wrong in the other direction —
+> you dispose of something worth thirty dollars.
+> This agent answers all four questions from a single photo.
+> Let me show you."
 
 ---
 
-### 00:45 — LIVE DEMO: USED BOTTLE → LIQUIDATE
+### ACT 2 — THE MAGIC (0:20–2:00)
 
-**[Operator UI. Select account: Alpha Retail. Type a Unit ID, select SKU-BOTTLE-750,
-drag in test_used_bottle image, click Inspect]**
+**[Select Alpha Retail account. Type unit ID. Choose SKU-BOTTLE-750. Drag in the used bottle photo. Hit Inspect.]**
 
-> "One photo of a returned water bottle."
+> "750ml stainless-steel water bottle. One photo.
+> Watch what happens."
 
-**[Results appear — show the three verdict cards]**
+**[Results load — hold for 2 seconds so viewer can read them]**
 
-> "Identity PASS — it matches the 750ml stainless-steel SKU in our catalogue.
-> Completeness PASS — bottle and lid both present.
-> Condition: Used - Acceptable. That is Amazon's published condition scale, not our own invented one.
+> "Three verdicts, each one independent.
+> Identity: PASS — it's the right product.
+> Completeness: PASS — bottle and lid, both there.
+> Condition: Used - Acceptable. Not our invented scale —
+> Amazon's actual published Condition Guidelines.
 > Disposition: liquidate.
-> Each verdict has a confidence score and a one-sentence explanation of what the model saw.
-> That sentence is the evidence trail — auditable, stored, and tamper-detectable via SHA-256."
+> Total cost: under two cents. Total time: under 10 seconds."
 
----
+**[Drag in the missing-lid photo — same SKU — hit Inspect]**
 
-### 01:30 — MISSING PART → REFURBISH
+> "Same bottle. Lid missing.
+> Completeness fails — and it tells you exactly what's missing.
+> A sound item with one missing part doesn't get disposed.
+> It goes to refurbish. Add the lid, resell it.
+> That's recoverable revenue the old process would have lost."
 
-**[Upload test_missing_lid image, same SKU, click Inspect]**
+**[Drag in the sealed bottle photo — click Inspect]**
 
-> "Same bottle, lid missing. Completeness fails — and it names the missing part.
-> A sound item with a missing part goes to refurbish, not dispose.
-> Add the part, resell it. That is recoverable value."
+> "Now this one.
+> The bag it came in reads one litre. We sold 750ml.
+> Identity FAIL.
+> The agent read the label on the packaging and caught a discrepancy
+> that a rushed warehouse worker absolutely would have missed.
+> Wrong item. Goes to a human — never auto-disposed.
+> You always want a human in the loop when something doesn't add up."
 
----
+**[Drag in the closed box photo — click Inspect]**
 
-### 02:00 — WRONG ITEM + FAIL OPEN
-
-**[Upload test_new_sealed image, SKU-BOTTLE-750, click Inspect]**
-
-> "This one is interesting. The bag reads 1 litre. We sold a 750ml bottle.
-> Identity FAIL — the label contradicts the SKU.
-> A wrong item never gets auto-disposed. It goes to pending review,
-> where a human and the Recovery Manager downstream can handle it."
-
-**[Upload test_closed_box image, click Inspect]**
-
-> "Closed shipping carton. Nothing inside is visible.
+> "Closed box. Can't see inside.
 > Every check comes back UNCERTAIN.
-> The agent refuses to guess. UNCERTAIN is a real, correct verdict.
-> Fail open: the capture is kept, routed to review, nothing is lost."
+> This is important. The agent knows what it doesn't know.
+> It doesn't guess. It keeps the capture, flags it for review,
+> and nothing falls through the cracks."
 
 ---
 
-### 02:30 — OVERRIDE + EVIDENCE RECORD
+### ACT 3 — THE TRUST LAYER (2:00–2:45)
 
-**[Click Change Decision on any result → Refurbish → type a reason → Save]**
+**[Click Change Decision on one result → pick Refurbish → type: "Operator disagrees — item appears functional" → Save]**
+**[Open Record Details — show the JSON]**
 
-> "Operators can disagree with the agent. The override is appended to the record —
-> original verdict, new verdict, reason, timestamp.
-> The agent's checks are left exactly as they were."
+> "Operators can always override the agent. And here's where it gets interesting
+> for the business side.
+> Every override is stored — original verdict, new verdict, reason, timestamp.
+> The agent's checks are never erased, just annotated.
+> That means every time a human disagrees with the AI,
+> we're capturing a labelled training example.
+> Over time, that override history becomes the dataset
+> that closes the gap between 88 percent accuracy and 98 percent.
+> The system gets smarter the more it's used."
 
-**[Click Record Details — show the JSON with checks, overrides, content_hash]**
+**[Switch account to Bravo Goods]**
 
-> "This is the evidence contract — the shape the Recovery Manager downstream consumes.
-> The content hash is SHA-256 over canonical JSON. It detects any tampering.
-> Overrides are history, not erasure."
-
----
-
-### 03:00 — TENANT ISOLATION
-
-**[Switch the account switcher from Alpha Retail to Bravo Goods]**
-
-> "Records are partitioned by tenant. Switch to Bravo Goods —
-> Alpha's inspection history disappears completely.
-> Guessing Alpha's record ID returns 404.
-> The org ID header is validated on every single request."
+> "Records are fully isolated by tenant.
+> Switch to a different client — completely separate history.
+> Guessing another tenant's record ID returns 404.
+> Enterprise-grade data isolation, out of the box."
 
 ---
 
-### 03:15 — PUBLIC API
+### ACT 4 — THE FEEDBACK LOOP (2:45–3:30)
 
-**[Open the /developers page]**
+**[Open the /label page]**
 
-> "The same agent is a public API. Any system with an API key
-> can upload photos and a SKU and get the evidence record back."
+> "Now here's the piece most AI tools skip entirely: measurement.
+> This is the two-person labelling interface.
+> Person A labels each return. Person B labels the same items independently.
+> They never see each other's answers."
 
-**[Switch to terminal, run this command:]**
+**[Open eval/eval-report.md — show the accuracy table]**
 
-  curl -X POST https://returns-manager-390y.onrender.com/api/v1/inspect
-    -H "X-API-Key: rtn_alpha_q5-pwtkUOYgqAElgbnTV9pwh"
-    -F "sku=SKU-BOTTLE-750"
-    -F "images=@test_images/test_used_bottle_1790418109421.jpg"
-
-> "One curl command. The key maps to one tenant only, rate-limited to 30 calls per hour,
-> with a service-wide daily spending cap so a public deployment cannot drain the account."
-
----
-
-### 03:45 — EVAL RESULTS
-
-**[Open eval/eval-report.md — show the per-check accuracy table]**
-
-> "The agent was evaluated on 50 units labelled independently by two people.
-> Identity: 88 percent accuracy. Completeness: 87.5 percent. Condition: 96 percent.
-> False positives: zero across all three checks.
+> "Then we run an evaluation. Real numbers from 50 labelled units:
+> Identity accuracy: 88 percent.
+> Condition accuracy: 96 percent.
+> And the number that actually matters for a returns system —
+> false positives: zero.
 > The agent never passed something both labellers marked as fail.
-> Human agreement — Cohen's kappa — was 1.0 on identity and condition.
-> Cost: 1.8 cents per unit. 47 of 50 units served from cache."
+> The safety-critical direction is completely clean."
 
-**[Scroll to Failure modes section]**
+**[Point at the kappa scores]**
 
-> "Three failure patterns identified. The model over-weights readable text on packaging.
-> Low-information images sometimes get a decided verdict when they should be UNCERTAIN.
-> Both have prompt-level fixes. But critically — zero false positives.
-> The safety-critical direction is clean."
+> "We also measure labeller agreement — Cohen's kappa.
+> 1.0 on identity and condition. That means the humans agreed perfectly.
+> Where they disagreed — those cases are marked ambiguous and excluded from scoring.
+> That's rigorous. Most AI demos don't show you this."
 
----
+**[Scroll to Failure modes]**
 
-### 04:15 — TEST SUITE
-
-**[Terminal:]**
-
-  python -m pytest tests -q
-
-> "36 offline tests, model mocked, run in 2 seconds.
-> They cover tenant isolation, fail-open, override history, the full disposition policy,
-> API key auth, rate limits, the daily cap, and account-scoped order lookup."
+> "And here's the failure mode analysis — three specific patterns,
+> each with a named fix. This is how you improve the model systematically,
+> not just by vibe-checking outputs.
+> Think of the A/B labelling as a permanent feedback loop.
+> Run it monthly. Track accuracy over time. Ship prompt improvements with confidence.
+> This is how the 88 becomes 95, then 98."
 
 ---
 
-### 04:30 — CLOSE
+### ACT 5 — UNDER THE HOOD (3:30–4:00)
 
-**[Return to the live UI]**
+**[Switch to terminal]**
 
-> "Returns Manager is step 4 of 5 in the chain.
-> One model call. Three graded checks. A deterministic policy.
-> An auditable evidence record the Recovery Manager can consume.
-> Zero false positives. 1.8 cents per unit.
-> It is live, tested, and documented."
+> "For the engineers in the room:"
 
-**[Hold on the URL for 3 seconds — cut]**
+```
+python -m pytest tests -q
+```
+
+> "36 offline tests. Model is mocked — they cost nothing and run in two seconds.
+> Tenant isolation, fail-open behaviour, override integrity, rate limits,
+> the full disposition policy — all covered."
+
+**[Open /developers page for 5 seconds]**
+
+> "Public API for downstream systems.
+> Upload photos and a SKU with an API key, get an evidence record back.
+> Rate-limited per key. Service-wide daily spending cap.
+> The model is swappable via an environment variable —
+> drop to Sonnet if you want half the cost,
+> upgrade to Opus if you need higher accuracy.
+> One config change."
 
 ---
 
-## RECORDING TIPS
+### CLOSE (4:00–4:20)
 
-- Use Loom (free) or OBS. Record at 1080p minimum.
-- Set browser font to 110 percent so text is readable in the recording.
-- If Render is in sleep mode (free tier), open the URL 30 seconds before recording starts.
-- Do one dry run. Target 4:40 to 5:00 total.
-- After you upload the video, paste the link into README.md and replace the line:
-    [Link to Demo Video (Placeholder) - Loom / YouTube]
+**[Return to the operator UI — the live URL on screen]**
+
+> "What makes this different isn't just the AI.
+> It's the feedback loop.
+> Every inspection builds the evidence record.
+> Every override adds a labelled training example.
+> Every eval run closes the gap.
+> The model grades. The code decides. The humans improve it.
+> That's not a demo. That's a system."
+
+**[Hold on URL: https://returns-manager-390y.onrender.com — 3 seconds — cut]**
+
+---
+
+## POWER LINES — SAY THESE CLEARLY
+
+Pick the moments to slow down and land these:
+
+1. "The agent knows what it doesn't know." (on UNCERTAIN)
+2. "Every override is a labelled training example." (on the feedback loop)
+3. "False positives: zero. The safety-critical direction is clean." (on eval)
+4. "The model grades. The code decides. The humans improve it." (closing)
+
+---
+
+## AFTER THE VIDEO
+
+Paste the Loom / YouTube link into README.md at this line:
+  [Link to Demo Video (Placeholder) - Loom / YouTube]
+
+Then run:
+  git add README.md
+  git commit -m "docs: add demo video link"
+  git push
