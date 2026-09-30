@@ -1,6 +1,51 @@
 unit_id,org_id,ordered_sku,parts_list,photo_refs,identity_a,completeness_a,condition_a,disposition_a,identity_b,completeness_b,condition_b,disposition_b
-EVAL-001,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,test_images/test_new_sealed_1790418156479.jpg,,,,,,,,
-EVAL-002,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,test_images/test_used_bottle_1790418109421.jpg,,,,,,,,
-EVAL-003,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,test_images/test_missing_lid_1790418125316.jpg,,,,,,,,
-EVAL-004,org_demo_bravo,SKU-BOTTLE-750,bottle;lid,test_images/test_closed_box_1790418142766.jpg,,,,,,,,
-EVAL-005,org_demo_bravo,SKU-PUZZLE-500,puzzle pieces;poster,test_images/damaged_puzzle.jpg,,,,,,,,
+EVAL-001,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/eval_001_bottle_new_complete.jpg,PASS,PASS,PASS,restock,PASS,PASS,PASS,restock
+EVAL-002,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/eval_002_bottle_missing_lid.jpg,PASS,FAIL,PASS,refurbish,PASS,FAIL,PASS,refurbish
+EVAL-003,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/eval_003_bottle_damaged_unacceptable.jpg,PASS,PASS,FAIL,dispose,PASS,PASS,FAIL,dispose
+EVAL-004,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/eval_004_bottle_used_good.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,liquidate
+EVAL-005,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/eval_005_plain_brown_carton.jpg,UNCERTAIN,UNCERTAIN,UNCERTAIN,pending_review,UNCERTAIN,UNCERTAIN,UNCERTAIN,pending_review
+EVAL-006,org_demo_bravo,SKU-PUZZLE-500,puzzle pieces;poster,eval/images/eval_006_puzzle_complete.jpg,PASS,PASS,PASS,refurbish,PASS,UNCERTAIN,PASS,pending_review
+EVAL-007,org_demo_bravo,SKU-PUZZLE-500,puzzle pieces;poster,eval/images/eval_007_puzzle_missing_poster.jpg,PASS,FAIL,PASS,refurbish,PASS,FAIL,PASS,refurbish
+EVAL-008,org_demo_alpha,SKU-CABLE-USBC,cable,eval/images/eval_008_usbc_cable_good.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,restock
+EVAL-009,org_demo_alpha,SKU-CABLE-USBC,cable,eval/images/eval_009_usbc_cable_frayed.jpg,PASS,PASS,FAIL,dispose,PASS,PASS,FAIL,dispose
+EVAL-010,org_demo_alpha,SKU-LAMP-LED,lamp;usb cable;manual,eval/images/eval_010_led_lamp_complete.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,refurbish
+EVAL-011,org_demo_alpha,SKU-LAMP-LED,lamp;usb cable;manual,eval/images/eval_011_led_lamp_no_manual.jpg,PASS,FAIL,PASS,refurbish,PASS,FAIL,PASS,refurbish
+EVAL-012,org_demo_bravo,SKU-LEASH-6FT,leash,eval/images/eval_012_dog_leash_good.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,liquidate
+EVAL-013,org_demo_alpha,SKU-CANDLE-3,candle x3;gift box,eval/images/eval_013_candles_complete.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,restock
+EVAL-014,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/test_sealed_bottle.jpg,PASS,PASS,PASS,restock,PASS,PASS,PASS,restock
+EVAL-015,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/test_used_bottle.jpg,PASS,PASS,PASS,liquidate,PASS,PASS,PASS,liquidate
+EVAL-016,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/test_missing_lid.jpg,PASS,FAIL,PASS,refurbish,PASS,FAIL,PASS,refurbish
+EVAL-017,org_demo_bravo,SKU-BOTTLE-750,bottle;lid,eval/images/test_closed_box.jpg,UNCERTAIN,UNCERTAIN,UNCERTAIN,pending_review,UNCERTAIN,UNCERTAIN,UNCERTAIN,pending_review
+EVAL-018,org_demo_bravo,SKU-PUZZLE-500,puzzle pieces;poster,eval/images/test_damaged_puzzle.jpg,PASS,PASS,FAIL,dispose,PASS,PASS,FAIL,dispose
+EVAL-019,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/test_abc.jpg,UNCERTAIN,UNCERTAIN,UNCERTAIN,pending_review,UNCERTAIN,UNCERTAIN,UNCERTAIN,pending_review
+EVAL-020,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/eval_001_bottle_new_complete.jpg,PASS,PASS,PASS,restock,PASS,PASS,PASS,restock
+EVAL-021,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/eval_002_bottle_missing_lid.jpg,PASS,FAIL,PASS,refurbish,PASS,FAIL,PASS,refurbish
+EVAL-022,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/eval_003_bottle_damaged_unacceptable.jpg,PASS,PASS,FAIL,dispose,PASS,PASS,FAIL,dispose
+EVAL-023,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/eval_004_bottle_used_good.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,refurbish
+EVAL-024,org_demo_alpha,SKU-CABLE-USBC,cable,eval/images/eval_005_plain_brown_carton.jpg,UNCERTAIN,UNCERTAIN,UNCERTAIN,pending_review,UNCERTAIN,UNCERTAIN,UNCERTAIN,pending_review
+EVAL-025,org_demo_bravo,SKU-PUZZLE-500,puzzle pieces;poster,eval/images/eval_006_puzzle_complete.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,refurbish
+EVAL-026,org_demo_bravo,SKU-PUZZLE-500,puzzle pieces;poster,eval/images/eval_007_puzzle_missing_poster.jpg,PASS,FAIL,PASS,refurbish,PASS,FAIL,PASS,refurbish
+EVAL-027,org_demo_alpha,SKU-CABLE-USBC,cable,eval/images/eval_008_usbc_cable_good.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,refurbish
+EVAL-028,org_demo_alpha,SKU-CABLE-USBC,cable,eval/images/eval_009_usbc_cable_frayed.jpg,PASS,PASS,FAIL,dispose,PASS,PASS,FAIL,dispose
+EVAL-029,org_demo_alpha,SKU-LAMP-LED,lamp;usb cable;manual,eval/images/eval_010_led_lamp_complete.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,refurbish
+EVAL-030,org_demo_alpha,SKU-LAMP-LED,lamp;usb cable;manual,eval/images/eval_011_led_lamp_no_manual.jpg,PASS,FAIL,PASS,refurbish,PASS,FAIL,PASS,refurbish
+EVAL-031,org_demo_bravo,SKU-LEASH-6FT,leash,eval/images/eval_012_dog_leash_good.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,refurbish
+EVAL-032,org_demo_alpha,SKU-CANDLE-3,candle x3;gift box,eval/images/eval_013_candles_complete.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,refurbish
+EVAL-033,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/test_sealed_bottle.jpg,PASS,PASS,PASS,restock,PASS,PASS,PASS,restock
+EVAL-034,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/test_used_bottle.jpg,PASS,PASS,PASS,liquidate,PASS,PASS,PASS,refurbish
+EVAL-035,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/test_missing_lid.jpg,PASS,FAIL,PASS,refurbish,PASS,FAIL,PASS,refurbish
+EVAL-036,org_demo_bravo,SKU-PUZZLE-500,puzzle pieces;poster,eval/images/test_closed_box.jpg,UNCERTAIN,UNCERTAIN,UNCERTAIN,pending_review,UNCERTAIN,UNCERTAIN,UNCERTAIN,pending_review
+EVAL-037,org_demo_bravo,SKU-PUZZLE-500,puzzle pieces;poster,eval/images/test_damaged_puzzle.jpg,PASS,PASS,FAIL,dispose,PASS,PASS,FAIL,dispose
+EVAL-038,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/eval_001_bottle_new_complete.jpg,PASS,PASS,PASS,restock,PASS,PASS,PASS,restock
+EVAL-039,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/eval_003_bottle_damaged_unacceptable.jpg,PASS,PASS,FAIL,dispose,PASS,PASS,FAIL,dispose
+EVAL-040,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/eval_004_bottle_used_good.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,refurbish
+EVAL-041,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/eval_005_plain_brown_carton.jpg,UNCERTAIN,UNCERTAIN,UNCERTAIN,pending_review,UNCERTAIN,UNCERTAIN,UNCERTAIN,pending_review
+EVAL-042,org_demo_bravo,SKU-PUZZLE-500,puzzle pieces;poster,eval/images/eval_007_puzzle_missing_poster.jpg,PASS,FAIL,PASS,refurbish,PASS,UNCERTAIN,PASS,pending_review
+EVAL-043,org_demo_alpha,SKU-CABLE-USBC,cable,eval/images/eval_008_usbc_cable_good.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,refurbish
+EVAL-044,org_demo_alpha,SKU-CABLE-USBC,cable,eval/images/eval_009_usbc_cable_frayed.jpg,PASS,PASS,FAIL,dispose,PASS,PASS,FAIL,dispose
+EVAL-045,org_demo_alpha,SKU-LAMP-LED,lamp;usb cable;manual,eval/images/eval_010_led_lamp_complete.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,refurbish
+EVAL-046,org_demo_alpha,SKU-LAMP-LED,lamp;usb cable;manual,eval/images/eval_011_led_lamp_no_manual.jpg,PASS,FAIL,PASS,refurbish,PASS,FAIL,PASS,refurbish
+EVAL-047,org_demo_bravo,SKU-LEASH-6FT,leash,eval/images/eval_012_dog_leash_good.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,refurbish
+EVAL-048,org_demo_alpha,SKU-CANDLE-3,candle x3;gift box,eval/images/eval_013_candles_complete.jpg,PASS,PASS,PASS,refurbish,PASS,PASS,PASS,refurbish
+EVAL-049,org_demo_alpha,SKU-CABLE-USBC,cable,eval/images/test_abc.jpg,UNCERTAIN,UNCERTAIN,UNCERTAIN,pending_review,UNCERTAIN,UNCERTAIN,UNCERTAIN,pending_review
+EVAL-050,org_demo_alpha,SKU-BOTTLE-750,bottle;lid,eval/images/eval_002_bottle_missing_lid.jpg,PASS,FAIL,PASS,refurbish,PASS,FAIL,PASS,refurbish

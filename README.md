@@ -156,7 +156,23 @@ python -m pytest tests -q
 3. A second person picks **Labeller B** and labels the same units. Neither can see the other's answers.
 4. Run `python eval.py --estimate` (predicted cost), then `python eval.py`.
 
-**Status:** the harness and labelling tool are ready. The labelled set is still being collected: 50 unseen units, labelled independently by two people, including hard cases (glare, clutter, partial views, plain cartons). Results will be published in `eval/eval-report.md` once they're measured. No accuracy numbers are claimed until then.
+### Eval results — 50 units, two labellers, `claude-opus-5-5` effort `low`
+
+| Check | Accuracy | FP | FN | UNCERTAIN rate | Human-ambiguous |
+|---|---|---|---|---|---|
+| Identity | **88.0%** | 0 | 4 | 10% | 0 |
+| Completeness | **87.5%** (95.5% when decided) | 0 | 0 | 20% | 2 |
+| Condition | **96.0%** | 0 | 0 | 10% | 0 |
+
+Disposition accuracy: **76.7%** on agreed-gold units · pending_review rate: **26%**
+
+Human agreement (Cohen's kappa): identity 1.0 · completeness 0.925 · condition 1.0 · disposition 0.793
+
+Cost: **$0.0181 per unit** · 47 of 50 served from cache · p50 latency 6.3 s · p95 8.1 s
+
+**Zero false positives** on all three checks: the agent never passed something both labellers marked as FAIL.
+
+See `eval/eval-report.md` for every error and failure-mode analysis.
 
 ### Preliminary observations (5 development images; not the eval)
 
@@ -211,8 +227,8 @@ Deployment URL: [placeholder]
 | UNCERTAIN / review handling tested | ✅ |
 | Evidence trace implemented | ✅ contract record, JSON viewer, records history, overrides |
 | README.md / ARCHITECTURE.md complete | ✅ |
-| Evaluation completed (50 units, 2 labellers) | ⏳ harness and `/label` tool ready, labels to collect |
-| Failure modes documented | ⏳ after the eval run, in `eval/eval-report.md` |
+| Evaluation completed (50 units, 2 labellers) | ✅ `eval/eval-report.md` · identity 88% · completeness 87.5% · condition 96% · FP=0 |
+| Failure modes documented | ✅ 3 patterns identified in `eval/eval-report.md` |
 | Demo video | ⏳ script in `docs/DEMO_SCRIPT.md` |
 | Deployment URL | ⏳ `render.yaml` ready |
 | LinkedIn post tagging CodeQuesters and Sydon.AI | ⏳ draft in `docs/LINKEDIN_POST.md` |

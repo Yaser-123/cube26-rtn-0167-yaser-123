@@ -1,0 +1,3877 @@
+{
+  "report": {
+    "units": 50,
+    "checks": {
+      "identity": {
+        "gold_n": 50,
+        "human_ambiguous": 0,
+        "correct": 44,
+        "FP": 0,
+        "FN": 4,
+        "agent_uncertain": 5,
+        "uncertain_when_gold_decided": 0,
+        "errors": [
+          {
+            "unit": "EVAL-014",
+            "gold": "PASS",
+            "agent": "FAIL"
+          },
+          {
+            "unit": "EVAL-018",
+            "gold": "PASS",
+            "agent": "FAIL"
+          },
+          {
+            "unit": "EVAL-019",
+            "gold": "UNCERTAIN",
+            "agent": "PASS"
+          },
+          {
+            "unit": "EVAL-033",
+            "gold": "PASS",
+            "agent": "FAIL"
+          },
+          {
+            "unit": "EVAL-037",
+            "gold": "PASS",
+            "agent": "FAIL"
+          },
+          {
+            "unit": "EVAL-049",
+            "gold": "UNCERTAIN",
+            "agent": "FAIL"
+          }
+        ],
+        "accuracy": 0.88,
+        "accuracy_when_decided": 0.88,
+        "uncertain_rate": 0.1
+      },
+      "completeness": {
+        "gold_n": 48,
+        "human_ambiguous": 2,
+        "correct": 42,
+        "FP": 0,
+        "FN": 0,
+        "agent_uncertain": 10,
+        "uncertain_when_gold_decided": 4,
+        "errors": [
+          {
+            "unit": "EVAL-019",
+            "gold": "UNCERTAIN",
+            "agent": "PASS"
+          },
+          {
+            "unit": "EVAL-049",
+            "gold": "UNCERTAIN",
+            "agent": "FAIL"
+          }
+        ],
+        "accuracy": 0.875,
+        "accuracy_when_decided": 0.955,
+        "uncertain_rate": 0.2
+      },
+      "condition": {
+        "gold_n": 50,
+        "human_ambiguous": 0,
+        "correct": 48,
+        "FP": 0,
+        "FN": 0,
+        "agent_uncertain": 5,
+        "uncertain_when_gold_decided": 0,
+        "errors": [
+          {
+            "unit": "EVAL-019",
+            "gold": "UNCERTAIN",
+            "agent": "PASS"
+          },
+          {
+            "unit": "EVAL-049",
+            "gold": "UNCERTAIN",
+            "agent": "PASS"
+          }
+        ],
+        "accuracy": 0.96,
+        "accuracy_when_decided": 0.96,
+        "uncertain_rate": 0.1
+      }
+    },
+    "agreement": {
+      "identity": 1.0,
+      "completeness": 0.925,
+      "condition": 1.0,
+      "disposition": 0.793
+    },
+    "disposition": {
+      "gold_n": 43,
+      "correct": 33,
+      "confusions": [
+        {
+          "unit": "EVAL-007",
+          "gold": "refurbish",
+          "agent": "pending_review"
+        },
+        {
+          "unit": "EVAL-014",
+          "gold": "restock",
+          "agent": "pending_review"
+        },
+        {
+          "unit": "EVAL-018",
+          "gold": "dispose",
+          "agent": "pending_review"
+        },
+        {
+          "unit": "EVAL-019",
+          "gold": "pending_review",
+          "agent": "refurbish"
+        },
+        {
+          "unit": "EVAL-025",
+          "gold": "refurbish",
+          "agent": "restock"
+        },
+        {
+          "unit": "EVAL-026",
+          "gold": "refurbish",
+          "agent": "pending_review"
+        },
+        {
+          "unit": "EVAL-032",
+          "gold": "refurbish",
+          "agent": "liquidate"
+        },
+        {
+          "unit": "EVAL-033",
+          "gold": "restock",
+          "agent": "pending_review"
+        },
+        {
+          "unit": "EVAL-037",
+          "gold": "dispose",
+          "agent": "pending_review"
+        },
+        {
+          "unit": "EVAL-048",
+          "gold": "refurbish",
+          "agent": "liquidate"
+        }
+      ],
+      "accuracy": 0.767,
+      "review_rate": 0.26
+    },
+    "cost_latency": {
+      "model": "claude-opus-5-5",
+      "effort": "low",
+      "billed_calls": 3,
+      "cache_hits": 47,
+      "total_cost_usd": 0.0543,
+      "cost_per_unit_usd": 0.0181,
+      "avg_input_tokens": 2934,
+      "avg_output_tokens": 318,
+      "latency_p50_ms": 6329,
+      "latency_p95_ms": 8104
+    }
+  },
+  "rows": [
+    {
+      "unit": {
+        "unit_id": "EVAL-001",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/eval_001_bottle_new_complete.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "restock",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "restock"
+      },
+      "record": {
+        "record_id": "RTN-7A33B734",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-001",
+        "captured_at": "2026-09-30T18:50:39.491907+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_001_bottle_new_complete.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.93,
+            "detail": "The bottle is stainless steel with a screw-on lid and is printed '750ml insulated stainless steel bottle', matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.92,
+            "detail": "Both the bottle and the black screw-on lid are present and attached.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Like New (observed: opened_unused). The bottle is out of its packaging with a clean brushed finish and shows no visible scratches, dents or dirt.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          }
+        ],
+        "outcome": "restock",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "39941f4781b4c50dfbb2d483498158a44b782ee8098a4f2bc00a2ef675de8d77"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "restock",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 307,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 16
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-002",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/eval_002_bottle_missing_lid.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "FAIL",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "FAIL",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-70B78392",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-002",
+        "captured_at": "2026-09-30T18:50:39.511760+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_002_bottle_missing_lid.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "The item is a stainless-steel bottle with a threaded neck, and its label reads 750ml, matching the insulated 750 ml screw-lid bottle in the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 19
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "FAIL",
+            "confidence": 0.95,
+            "detail": "The bottle neck shows exposed screw threads and no lid is present anywhere in the photo. Missing: lid.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 19
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Good (observed: signs_of_use). The body shows visible use, with numerous light scratches and dark scuff marks, but no dents or breakage.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 19
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "414df70e0c9532da2f7d01f8a2288b52a75c84c29b4fc3d4cbc4d9f83a1af70a"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "FAIL",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 393,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 19
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-003",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/eval_003_bottle_damaged_unacceptable.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "FAIL",
+        "disposition_a": "dispose",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "FAIL",
+        "disposition_b": "dispose"
+      },
+      "record": {
+        "record_id": "RTN-156FD191",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-003",
+        "captured_at": "2026-09-30T18:50:39.522314+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_003_bottle_damaged_unacceptable.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The item is a stainless-steel bottle marked 750ml with a lid, matching the catalogue description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "Both the bottle and the black lid are present, with the lid fitted on the neck.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "condition",
+            "verdict": "FAIL",
+            "confidence": 0.95,
+            "detail": "Unacceptable (observed: damaged). The bottle body is heavily crushed and deeply dented with extensive scratches, and the lid appears deformed.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          }
+        ],
+        "outcome": "dispose",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "3c0b30a016d80c5c82266195200d4b6a2ecd6fb6c6cd10d84be57a3dca107479"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "FAIL"
+      },
+      "disposition": "dispose",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 319,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 10
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-004",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/eval_004_bottle_used_good.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "liquidate"
+      },
+      "record": {
+        "record_id": "RTN-9E2359E7",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-004",
+        "captured_at": "2026-09-30T18:50:39.542402+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_004_bottle_used_good.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "The item is a stainless-steel bottle with a screw-on lid and is roughly 750 ml in size, matching the description; insulation cannot be confirmed from the photo.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 20
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "Both the bottle and the black screw-on lid are present and attached.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 20
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "Used - Good (observed: signs_of_use). The bottle body has visible light scratches and scuffs across its surface but no dents or breakage.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 20
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "c7834968705cdc352bdb63efbd7cbd1fe007fca9ec05f4f3b021d73b51035b03"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 317,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 20
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-005",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/eval_005_plain_brown_carton.jpg",
+        "identity_a": "UNCERTAIN",
+        "completeness_a": "UNCERTAIN",
+        "condition_a": "UNCERTAIN",
+        "disposition_a": "pending_review",
+        "identity_b": "UNCERTAIN",
+        "completeness_b": "UNCERTAIN",
+        "condition_b": "UNCERTAIN",
+        "disposition_b": "pending_review"
+      },
+      "record": {
+        "record_id": "RTN-1D4E9477",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-005",
+        "captured_at": "2026-09-30T18:50:39.552549+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_005_plain_brown_carton.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.9,
+            "detail": "Only a closed plain shipping carton is visible, so the bottle itself cannot be checked against the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.9,
+            "detail": "The bottle and lid could be inside the taped carton, which is not factory-sealed retail packaging.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "condition",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.9,
+            "detail": "Not gradable (observed: uncertain). The item is not visible, and the creases on the outer carton say nothing reliable about the bottle's condition.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          }
+        ],
+        "outcome": "pending_review",
+        "overrides": [],
+        "status": "pending",
+        "content_hash": "8e9cdff23dfdd8f8f3bf3676b5ea696ad366b653fea03f4777daca7c6b551072"
+      },
+      "verdicts": {
+        "identity": "UNCERTAIN",
+        "completeness": "UNCERTAIN",
+        "condition": "UNCERTAIN"
+      },
+      "disposition": "pending_review",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 340,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 10
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-006",
+        "org_id": "org_demo_bravo",
+        "ordered_sku": "SKU-PUZZLE-500",
+        "parts_list": "puzzle pieces;poster",
+        "photo_refs": "eval/images/eval_006_puzzle_complete.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "UNCERTAIN",
+        "condition_b": "PASS",
+        "disposition_b": "pending_review"
+      },
+      "record": {
+        "record_id": "RTN-AC89E18C",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_bravo",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-006",
+        "captured_at": "2026-09-30T18:50:39.572419+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_006_puzzle_complete.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.93,
+            "detail": "The box reads '500 pieces' and a matching reference poster is present, which fits the description of a 500-piece jigsaw puzzle with reference poster.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 19
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.7,
+            "detail": "Both expected parts, the puzzle pieces and the poster, are visible, though a full 500-piece count cannot be confirmed from a photo.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 19
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Like New (observed: opened_unused). The box is opened but the box, pieces and poster show no visible wear or damage.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 19
+          }
+        ],
+        "outcome": "restock",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "103b2f92302e6f03a44c887b1b3d8ade1d688b99517322a4f4e3d5947a830ea2"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "restock",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2947,
+        "output_tokens": 345,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 19
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-007",
+        "org_id": "org_demo_bravo",
+        "ordered_sku": "SKU-PUZZLE-500",
+        "parts_list": "puzzle pieces;poster",
+        "photo_refs": "eval/images/eval_007_puzzle_missing_poster.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "FAIL",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "FAIL",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-DCD81B7F",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_bravo",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-007",
+        "captured_at": "2026-09-30T18:50:39.630875+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_007_puzzle_missing_poster.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.93,
+            "detail": "The box is labelled as a 500-piece jigsaw puzzle and contains puzzle pieces, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 58
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.55,
+            "detail": "No poster is visible in the open box, but a folded poster could be hidden under the pieces or in the lid, and the tag's note is not photo evidence.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 58
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.7,
+            "detail": "Used - Like New (observed: opened_unused). The box is opened and the pieces are loose, but neither the box nor the pieces show visible damage or wear.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 58
+          }
+        ],
+        "outcome": "pending_review",
+        "overrides": [],
+        "status": "pending",
+        "content_hash": "8f83e5835112b3756d3d9cb4c8caa8eff6b6618ff1ce5fdd5d0ac206c9789650"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "UNCERTAIN",
+        "condition": "PASS"
+      },
+      "disposition": "pending_review",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2947,
+        "output_tokens": 347,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 58
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-008",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-CABLE-USBC",
+        "parts_list": "cable",
+        "photo_refs": "eval/images/eval_008_usbc_cable_good.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "restock"
+      },
+      "record": {
+        "record_id": "RTN-9C961CA0",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-008",
+        "captured_at": "2026-09-30T18:50:39.645053+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_008_usbc_cable_good.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.93,
+            "detail": "Both ends are USB-C plugs on a charging-style cable, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 14
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.92,
+            "detail": "The only expected part, the cable, is fully visible with both connectors present.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 14
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.75,
+            "detail": "Used - Good (observed: signs_of_use). Visible fraying of the braid just below the left connector's strain relief plus light lint indicate use, but the cable is not broken.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 14
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "269c61d2bb5bec4274b8c01899f23247c17cc180e36688df267dc390cc84b387"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2928,
+        "output_tokens": 291,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 14
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-009",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-CABLE-USBC",
+        "parts_list": "cable",
+        "photo_refs": "eval/images/eval_009_usbc_cable_frayed.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "FAIL",
+        "disposition_a": "dispose",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "FAIL",
+        "disposition_b": "dispose"
+      },
+      "record": {
+        "record_id": "RTN-11FFCDF9",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-009",
+        "captured_at": "2026-09-30T18:50:39.661084+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_009_usbc_cable_frayed.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "A USB-C connector on a braided cable matches the USB-C charging cable description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "The only expected part, the cable, is present with its USB-C end visible.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          },
+          {
+            "check_key": "condition",
+            "verdict": "FAIL",
+            "confidence": 0.95,
+            "detail": "Unacceptable (observed: damaged). The jacket is ripped open at the connector, exposing the internal wires, and the housing is scratched.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          }
+        ],
+        "outcome": "dispose",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "e1656e06905156c52c217f9bcd730ee64ab0bc1df03750a800beed988fd06b63"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "FAIL"
+      },
+      "disposition": "dispose",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2928,
+        "output_tokens": 283,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 16
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-010",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-LAMP-LED",
+        "parts_list": "lamp;usb cable;manual",
+        "photo_refs": "eval/images/eval_010_led_lamp_complete.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-CC74C66D",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-010",
+        "captured_at": "2026-09-30T18:50:39.672548+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_010_led_lamp_complete.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The item is an LED desk lamp with a light panel head, gooseneck, arm and touch base, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The lamp, USB power cable and printed manual are all visible on the table.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.75,
+            "detail": "Used - Good (observed: signs_of_use). The lamp base and head show visible dust, smudges and light scuffs but no breakage.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "1eba700c07461af9f854f2e49c8c1811d2a4a14ba27fd644139616bd9354ced3"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2946,
+        "output_tokens": 315,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 11
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-011",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-LAMP-LED",
+        "parts_list": "lamp;usb cable;manual",
+        "photo_refs": "eval/images/eval_011_led_lamp_no_manual.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "FAIL",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "FAIL",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-85ACBA6B",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-011",
+        "captured_at": "2026-09-30T18:50:39.690927+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_011_led_lamp_no_manual.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The item is an LED desk lamp with a USB cable, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "FAIL",
+            "confidence": 0.75,
+            "detail": "The lamp and USB cable are laid out in the open, but no printed manual appears anywhere in the photo. Missing: manual.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Like New (observed: opened_unused). The lamp and cable look clean with no visible scratches or damage; the scuffs are on the workbench, not the item.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "4cb7d4c89f409275dd8b3085edb44437872a16e02da77a81992727b581a29518"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "FAIL",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2946,
+        "output_tokens": 297,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 16
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-012",
+        "org_id": "org_demo_bravo",
+        "ordered_sku": "SKU-LEASH-6FT",
+        "parts_list": "leash",
+        "photo_refs": "eval/images/eval_012_dog_leash_good.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "liquidate"
+      },
+      "record": {
+        "record_id": "RTN-C6234F7A",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_bravo",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-012",
+        "captured_at": "2026-09-30T18:50:39.702418+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_012_dog_leash_good.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "The item is a webbing dog leash with a handle loop and snap hook, and its coiled length is consistent with about 6 ft.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The whole leash is visible, with its handle loop, webbing and snap hook all present.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Good (observed: signs_of_use). The webbing shows visible fuzzing and frayed edges and the hook is tarnished, but the leash appears intact and functional.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "e353e7a61a0cd02e277ee48bfe0376833706b4406c2d420715c8e8cedb80bb44"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2929,
+        "output_tokens": 334,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 11
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-013",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-CANDLE-3",
+        "parts_list": "candle x3;gift box",
+        "photo_refs": "eval/images/eval_013_candles_complete.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "restock"
+      },
+      "record": {
+        "record_id": "RTN-F5A78F9B",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-013",
+        "captured_at": "2026-09-30T18:50:39.719114+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_013_candles_complete.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.95,
+            "detail": "The item is a set of three scented jar candles in a branded gift box, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.93,
+            "detail": "All three candles are seated in the insert and the gift box with its lid is present.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Acceptable (observed: signs_of_use). All three candles have been burned, with charred wicks, melted wax and soot on the jars, and the box lid is creased and scuffed, though the candles remain usable.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          }
+        ],
+        "outcome": "liquidate",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "22b0312eb608e6e25306cc6731223d279f3f637b5e4563b57d1945b08bc20ac2"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "liquidate",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2942,
+        "output_tokens": 362,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 16
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-014",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/test_sealed_bottle.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "restock",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "restock"
+      },
+      "record": {
+        "record_id": "RTN-DF687B64",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-014",
+        "captured_at": "2026-09-30T18:50:39.734827+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/test_sealed_bottle.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "FAIL",
+            "confidence": 0.6,
+            "detail": "It is an insulated bottle with a screw lid, but the package label states 1L rather than the catalogued 750 ml, a size mismatch.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 15
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "Both the bottle and its screw lid are visible inside the sealed bag.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 15
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.75,
+            "detail": "New (observed: factory_sealed). The heat-sealed bag looks intact and the bottle shows no visible wear.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 15
+          }
+        ],
+        "outcome": "pending_review",
+        "overrides": [],
+        "status": "pending",
+        "content_hash": "0494c053babb43c0ceb9fcde2b7e2aae556abe43e46f882d607995fa380df082"
+      },
+      "verdicts": {
+        "identity": "FAIL",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "pending_review",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 505,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 15
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-015",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/test_used_bottle.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "liquidate",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "liquidate"
+      },
+      "record": {
+        "record_id": "RTN-5B74D782",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-015",
+        "captured_at": "2026-09-30T18:50:39.750827+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/test_used_bottle.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "The item is an insulated stainless-steel bottle with a screw-on lid, matching the description; its exact capacity cannot be confirmed from the photo.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "Both the bottle and the lid are present and assembled.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Acceptable (observed: signs_of_use). There is extensive coating chipping, scratches and scuffs across the body and lid, but no dents or breakage are visible.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 16
+          }
+        ],
+        "outcome": "liquidate",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "c5f715f399abc3aaac807e191571492d87f8f5b0542edef26fe3b582da72cbc0"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "liquidate",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 324,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 16
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-016",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/test_missing_lid.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "FAIL",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "FAIL",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-B70997A1",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-016",
+        "captured_at": "2026-09-30T18:50:39.761948+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/test_missing_lid.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "A blue insulated stainless-steel bottle with a threaded screw-top mouth matches the description, and nothing contradicts the 750 ml size.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "FAIL",
+            "confidence": 0.9,
+            "detail": "The threads at the mouth are exposed and no screw-on lid is visible. Missing: lid.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.75,
+            "detail": "Used - Like New (observed: opened_unused). The powder coat and steel rim look clean with no visible scratches, dents or dirt.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "a029ecf067baa5413a450647d40b9d5762a7084639b9ec5286e5600c762c140c"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "FAIL",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 304,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 11
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-017",
+        "org_id": "org_demo_bravo",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/test_closed_box.jpg",
+        "identity_a": "UNCERTAIN",
+        "completeness_a": "UNCERTAIN",
+        "condition_a": "UNCERTAIN",
+        "disposition_a": "pending_review",
+        "identity_b": "UNCERTAIN",
+        "completeness_b": "UNCERTAIN",
+        "condition_b": "UNCERTAIN",
+        "disposition_b": "pending_review"
+      },
+      "record": {
+        "record_id": "RTN-2200196D",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_bravo",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-017",
+        "captured_at": "2026-09-30T18:50:39.772101+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/test_closed_box.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.9,
+            "detail": "Only a closed plain shipping carton is visible, so the water bottle itself cannot be seen.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.9,
+            "detail": "The carton is closed and is not factory-sealed retail packaging, so whether the bottle and lid are inside cannot be determined.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "condition",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.85,
+            "detail": "Not gradable (observed: uncertain). The item is not visible, and the scuffs and small puncture on the outer carton do not show the bottle's condition.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          }
+        ],
+        "outcome": "pending_review",
+        "overrides": [],
+        "status": "pending",
+        "content_hash": "4176c88120ef25cc51feb6b8b3c4bca8566c351ff9f4d4848b37c39d56a5f74e"
+      },
+      "verdicts": {
+        "identity": "UNCERTAIN",
+        "completeness": "UNCERTAIN",
+        "condition": "UNCERTAIN"
+      },
+      "disposition": "pending_review",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 347,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 10
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-018",
+        "org_id": "org_demo_bravo",
+        "ordered_sku": "SKU-PUZZLE-500",
+        "parts_list": "puzzle pieces;poster",
+        "photo_refs": "eval/images/test_damaged_puzzle.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "FAIL",
+        "disposition_a": "dispose",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "FAIL",
+        "disposition_b": "dispose"
+      },
+      "record": {
+        "record_id": "RTN-7551F1BC",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_bravo",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-018",
+        "captured_at": "2026-09-30T18:50:39.782088+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/test_damaged_puzzle.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "FAIL",
+            "confidence": 0.85,
+            "detail": "The box is clearly marked 1000 pieces, contradicting the catalogue's 500-piece puzzle.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.4,
+            "detail": "Loose pieces are visible, but the piece count and the presence of a reference poster cannot be verified from the photo.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          },
+          {
+            "check_key": "condition",
+            "verdict": "FAIL",
+            "confidence": 0.9,
+            "detail": "Unacceptable (observed: damaged). The box is crushed and ripped open with a torn lid, and the pieces are worn and scattered with debris.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          }
+        ],
+        "outcome": "pending_review",
+        "overrides": [],
+        "status": "pending",
+        "content_hash": "1369296eadd3b0d59daab211bc5d77fa3f88fc92928c5fd2bdcc1b5651c03a2e"
+      },
+      "verdicts": {
+        "identity": "FAIL",
+        "completeness": "UNCERTAIN",
+        "condition": "FAIL"
+      },
+      "disposition": "pending_review",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2947,
+        "output_tokens": 343,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 9
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-019",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/test_abc.jpg",
+        "identity_a": "UNCERTAIN",
+        "completeness_a": "UNCERTAIN",
+        "condition_a": "UNCERTAIN",
+        "disposition_a": "pending_review",
+        "identity_b": "UNCERTAIN",
+        "completeness_b": "UNCERTAIN",
+        "condition_b": "UNCERTAIN",
+        "disposition_b": "pending_review"
+      },
+      "record": {
+        "record_id": "RTN-DF6E37E0",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-019",
+        "captured_at": "2026-09-30T18:50:39.797669+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/test_abc.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "The item is a blue insulated stainless-steel bottle with a screw-on loop lid, matching the description; the 750 ml capacity cannot be confirmed from the photo.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 15
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "The bottle is clearly visible with its lid screwed on.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 15
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.7,
+            "detail": "Used - Good (observed: signs_of_use). The blue powder coat shows visible scuffs and speckled marks consistent with use, but no dents or breakage.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 15
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "a369ff9084bbd4591626e0d826a65324d8de2bf243eff675b7362bcea163ea00"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 323,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 15
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-020",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/eval_001_bottle_new_complete.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "restock",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "restock"
+      },
+      "record": {
+        "record_id": "RTN-F635A194",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-020",
+        "captured_at": "2026-09-30T18:50:39.805380+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_001_bottle_new_complete.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.93,
+            "detail": "The bottle is stainless steel with a screw-on lid and is printed '750ml insulated stainless steel bottle', matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 7
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.92,
+            "detail": "Both the bottle and the black screw-on lid are present and attached.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 7
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Like New (observed: opened_unused). The bottle is out of its packaging with a clean brushed finish and shows no visible scratches, dents or dirt.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 7
+          }
+        ],
+        "outcome": "restock",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "44bda95b6573e8e6c53bd2c407378c18e337dcb676167c85894a6e6e2b9b0cb7"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "restock",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 307,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 7
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-021",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/eval_002_bottle_missing_lid.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "FAIL",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "FAIL",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-2531BC24",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-021",
+        "captured_at": "2026-09-30T18:50:39.811825+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_002_bottle_missing_lid.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "The item is a stainless-steel bottle with a threaded neck, and its label reads 750ml, matching the insulated 750 ml screw-lid bottle in the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "FAIL",
+            "confidence": 0.95,
+            "detail": "The bottle neck shows exposed screw threads and no lid is present anywhere in the photo. Missing: lid.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Good (observed: signs_of_use). The body shows visible use, with numerous light scratches and dark scuff marks, but no dents or breakage.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "3be081bccb2e46064f13118c925cfb7a37a5e7cf9f9887e1399439cc06cac18e"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "FAIL",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 393,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 6
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-022",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/eval_003_bottle_damaged_unacceptable.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "FAIL",
+        "disposition_a": "dispose",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "FAIL",
+        "disposition_b": "dispose"
+      },
+      "record": {
+        "record_id": "RTN-19E6F56C",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-022",
+        "captured_at": "2026-09-30T18:50:39.822476+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_003_bottle_damaged_unacceptable.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The item is a stainless-steel bottle marked 750ml with a lid, matching the catalogue description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "Both the bottle and the black lid are present, with the lid fitted on the neck.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "condition",
+            "verdict": "FAIL",
+            "confidence": 0.95,
+            "detail": "Unacceptable (observed: damaged). The bottle body is heavily crushed and deeply dented with extensive scratches, and the lid appears deformed.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          }
+        ],
+        "outcome": "dispose",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "7dc5bef0ffacb8e9543acb77db4c5dd4b57a50df9c24d05bd1f9ae7f49ed7153"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "FAIL"
+      },
+      "disposition": "dispose",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 319,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 10
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-023",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/eval_004_bottle_used_good.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-B962353B",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-023",
+        "captured_at": "2026-09-30T18:50:39.836610+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_004_bottle_used_good.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "The item is a stainless-steel bottle with a screw-on lid and is roughly 750 ml in size, matching the description; insulation cannot be confirmed from the photo.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 14
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "Both the bottle and the black screw-on lid are present and attached.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 14
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "Used - Good (observed: signs_of_use). The bottle body has visible light scratches and scuffs across its surface but no dents or breakage.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 14
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "e141434820a63feb30d9b67ebf0ce16698f72a07766ab2a9319da2217f0369b3"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 317,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 14
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-024",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-CABLE-USBC",
+        "parts_list": "cable",
+        "photo_refs": "eval/images/eval_005_plain_brown_carton.jpg",
+        "identity_a": "UNCERTAIN",
+        "completeness_a": "UNCERTAIN",
+        "condition_a": "UNCERTAIN",
+        "disposition_a": "pending_review",
+        "identity_b": "UNCERTAIN",
+        "completeness_b": "UNCERTAIN",
+        "condition_b": "UNCERTAIN",
+        "disposition_b": "pending_review"
+      },
+      "record": {
+        "record_id": "RTN-6E06F48D",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-024",
+        "captured_at": "2026-09-30T18:50:46.166435+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_005_plain_brown_carton.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.9,
+            "detail": "Only a closed plain shipping carton is visible, so the USB-C cable itself cannot be seen.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6329
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.9,
+            "detail": "The carton is closed and is not factory-sealed retail packaging, so the cable could be inside or missing.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6329
+          },
+          {
+            "check_key": "condition",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.9,
+            "detail": "Not gradable (observed: uncertain). The item is not visible, and the carton's creases and wrinkles say nothing about the cable's condition.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6329
+          }
+        ],
+        "outcome": "pending_review",
+        "overrides": [],
+        "status": "pending",
+        "content_hash": "9b6a0610f42581863d85a5824f489b66c130099e65f408a107f04f8ced64cd76"
+      },
+      "verdicts": {
+        "identity": "UNCERTAIN",
+        "completeness": "UNCERTAIN",
+        "condition": "UNCERTAIN"
+      },
+      "disposition": "pending_review",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2928,
+        "output_tokens": 324,
+        "cost_usd": 0.01819,
+        "cached": false,
+        "latency_ms": 6329
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-025",
+        "org_id": "org_demo_bravo",
+        "ordered_sku": "SKU-PUZZLE-500",
+        "parts_list": "puzzle pieces;poster",
+        "photo_refs": "eval/images/eval_006_puzzle_complete.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-B9681AD7",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_bravo",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-025",
+        "captured_at": "2026-09-30T18:50:46.180813+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_006_puzzle_complete.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.93,
+            "detail": "The box reads '500 pieces' and a matching reference poster is present, which fits the description of a 500-piece jigsaw puzzle with reference poster.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 14
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.7,
+            "detail": "Both expected parts, the puzzle pieces and the poster, are visible, though a full 500-piece count cannot be confirmed from a photo.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 14
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Like New (observed: opened_unused). The box is opened but the box, pieces and poster show no visible wear or damage.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 14
+          }
+        ],
+        "outcome": "restock",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "91affd8019a9eaa2a36d153cb2062cd9840c98274faaf8f179d72949aa301a17"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "restock",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2947,
+        "output_tokens": 345,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 14
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-026",
+        "org_id": "org_demo_bravo",
+        "ordered_sku": "SKU-PUZZLE-500",
+        "parts_list": "puzzle pieces;poster",
+        "photo_refs": "eval/images/eval_007_puzzle_missing_poster.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "FAIL",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "FAIL",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-BE561F13",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_bravo",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-026",
+        "captured_at": "2026-09-30T18:50:46.192466+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_007_puzzle_missing_poster.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.93,
+            "detail": "The box is labelled as a 500-piece jigsaw puzzle and contains puzzle pieces, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.55,
+            "detail": "No poster is visible in the open box, but a folded poster could be hidden under the pieces or in the lid, and the tag's note is not photo evidence.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.7,
+            "detail": "Used - Like New (observed: opened_unused). The box is opened and the pieces are loose, but neither the box nor the pieces show visible damage or wear.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          }
+        ],
+        "outcome": "pending_review",
+        "overrides": [],
+        "status": "pending",
+        "content_hash": "d1ad38045eb19c5bf7c3b80a17e8784cdd48ea34ec208b545c1624f8a2c977bf"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "UNCERTAIN",
+        "condition": "PASS"
+      },
+      "disposition": "pending_review",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2947,
+        "output_tokens": 347,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 11
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-027",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-CABLE-USBC",
+        "parts_list": "cable",
+        "photo_refs": "eval/images/eval_008_usbc_cable_good.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-389E1683",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-027",
+        "captured_at": "2026-09-30T18:50:46.201675+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_008_usbc_cable_good.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.93,
+            "detail": "Both ends are USB-C plugs on a charging-style cable, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.92,
+            "detail": "The only expected part, the cable, is fully visible with both connectors present.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.75,
+            "detail": "Used - Good (observed: signs_of_use). Visible fraying of the braid just below the left connector's strain relief plus light lint indicate use, but the cable is not broken.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "558a254c5b5c5e63500f66d08a8aa90dfde430be4f95d9d05093e85c39eca790"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2928,
+        "output_tokens": 291,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 9
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-028",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-CABLE-USBC",
+        "parts_list": "cable",
+        "photo_refs": "eval/images/eval_009_usbc_cable_frayed.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "FAIL",
+        "disposition_a": "dispose",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "FAIL",
+        "disposition_b": "dispose"
+      },
+      "record": {
+        "record_id": "RTN-959B523F",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-028",
+        "captured_at": "2026-09-30T18:50:46.210778+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_009_usbc_cable_frayed.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "A USB-C connector on a braided cable matches the USB-C charging cable description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "The only expected part, the cable, is present with its USB-C end visible.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          },
+          {
+            "check_key": "condition",
+            "verdict": "FAIL",
+            "confidence": 0.95,
+            "detail": "Unacceptable (observed: damaged). The jacket is ripped open at the connector, exposing the internal wires, and the housing is scratched.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          }
+        ],
+        "outcome": "dispose",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "b0997d51e06f7f2d2e2ce4c850ca87f2933820480081226b89fc306403eb0ab6"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "FAIL"
+      },
+      "disposition": "dispose",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2928,
+        "output_tokens": 283,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 9
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-029",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-LAMP-LED",
+        "parts_list": "lamp;usb cable;manual",
+        "photo_refs": "eval/images/eval_010_led_lamp_complete.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-EB621F5C",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-029",
+        "captured_at": "2026-09-30T18:50:46.221569+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_010_led_lamp_complete.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The item is an LED desk lamp with a light panel head, gooseneck, arm and touch base, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The lamp, USB power cable and printed manual are all visible on the table.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.75,
+            "detail": "Used - Good (observed: signs_of_use). The lamp base and head show visible dust, smudges and light scuffs but no breakage.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "1723bcb3beb5eed4d5d34c2fef9b5109b1988131bb9a54bd3b60f8c83d56b9fd"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2946,
+        "output_tokens": 315,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 9
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-030",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-LAMP-LED",
+        "parts_list": "lamp;usb cable;manual",
+        "photo_refs": "eval/images/eval_011_led_lamp_no_manual.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "FAIL",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "FAIL",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-D7CBF93B",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-030",
+        "captured_at": "2026-09-30T18:50:46.231944+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_011_led_lamp_no_manual.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The item is an LED desk lamp with a USB cable, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "FAIL",
+            "confidence": 0.75,
+            "detail": "The lamp and USB cable are laid out in the open, but no printed manual appears anywhere in the photo. Missing: manual.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Like New (observed: opened_unused). The lamp and cable look clean with no visible scratches or damage; the scuffs are on the workbench, not the item.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "f30f62fba83a59a94277206284398ccbb44038956c4aff7e64b6bb315ed304ef"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "FAIL",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2946,
+        "output_tokens": 297,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 10
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-031",
+        "org_id": "org_demo_bravo",
+        "ordered_sku": "SKU-LEASH-6FT",
+        "parts_list": "leash",
+        "photo_refs": "eval/images/eval_012_dog_leash_good.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-B91071DF",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_bravo",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-031",
+        "captured_at": "2026-09-30T18:50:46.242397+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_012_dog_leash_good.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "The item is a webbing dog leash with a handle loop and snap hook, and its coiled length is consistent with about 6 ft.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The whole leash is visible, with its handle loop, webbing and snap hook all present.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Good (observed: signs_of_use). The webbing shows visible fuzzing and frayed edges and the hook is tarnished, but the leash appears intact and functional.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "07016bbab0dbfa8a4e38dfee938b0a883f17ca4074005e55aca0af915aed9d14"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2929,
+        "output_tokens": 334,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 10
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-032",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-CANDLE-3",
+        "parts_list": "candle x3;gift box",
+        "photo_refs": "eval/images/eval_013_candles_complete.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-F5DD2C50",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-032",
+        "captured_at": "2026-09-30T18:50:46.251776+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_013_candles_complete.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.95,
+            "detail": "The item is a set of three scented jar candles in a branded gift box, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.93,
+            "detail": "All three candles are seated in the insert and the gift box with its lid is present.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Acceptable (observed: signs_of_use). All three candles have been burned, with charred wicks, melted wax and soot on the jars, and the box lid is creased and scuffed, though the candles remain usable.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          }
+        ],
+        "outcome": "liquidate",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "8c7a3c1db86c53919b678632af4669fa73de943b117172dca088c02463fb0223"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "liquidate",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2942,
+        "output_tokens": 362,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 9
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-033",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/test_sealed_bottle.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "restock",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "restock"
+      },
+      "record": {
+        "record_id": "RTN-1CA702E3",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-033",
+        "captured_at": "2026-09-30T18:50:46.263147+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/test_sealed_bottle.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "FAIL",
+            "confidence": 0.6,
+            "detail": "It is an insulated bottle with a screw lid, but the package label states 1L rather than the catalogued 750 ml, a size mismatch.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "Both the bottle and its screw lid are visible inside the sealed bag.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.75,
+            "detail": "New (observed: factory_sealed). The heat-sealed bag looks intact and the bottle shows no visible wear.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          }
+        ],
+        "outcome": "pending_review",
+        "overrides": [],
+        "status": "pending",
+        "content_hash": "40d2e609cb49c1f40bb222e5b8b41908bdeea8ad6550fb8a42aa3d60c08f0ac1"
+      },
+      "verdicts": {
+        "identity": "FAIL",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "pending_review",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 505,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 11
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-034",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/test_used_bottle.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "liquidate",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-18187EF3",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-034",
+        "captured_at": "2026-09-30T18:50:46.272768+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/test_used_bottle.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "The item is an insulated stainless-steel bottle with a screw-on lid, matching the description; its exact capacity cannot be confirmed from the photo.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "Both the bottle and the lid are present and assembled.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Acceptable (observed: signs_of_use). There is extensive coating chipping, scratches and scuffs across the body and lid, but no dents or breakage are visible.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 9
+          }
+        ],
+        "outcome": "liquidate",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "c68b615837851cf153821786306e0988a441f27e1868aa14b86baf4e63cbf332"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "liquidate",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 324,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 9
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-035",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/test_missing_lid.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "FAIL",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "FAIL",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-27B52488",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-035",
+        "captured_at": "2026-09-30T18:50:46.284064+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/test_missing_lid.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "A blue insulated stainless-steel bottle with a threaded screw-top mouth matches the description, and nothing contradicts the 750 ml size.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "FAIL",
+            "confidence": 0.9,
+            "detail": "The threads at the mouth are exposed and no screw-on lid is visible. Missing: lid.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.75,
+            "detail": "Used - Like New (observed: opened_unused). The powder coat and steel rim look clean with no visible scratches, dents or dirt.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "65c595fac669ea1b11555e35aee3a28a9b26cfc58b602040d035e2b5c487145b"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "FAIL",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 304,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 11
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-036",
+        "org_id": "org_demo_bravo",
+        "ordered_sku": "SKU-PUZZLE-500",
+        "parts_list": "puzzle pieces;poster",
+        "photo_refs": "eval/images/test_closed_box.jpg",
+        "identity_a": "UNCERTAIN",
+        "completeness_a": "UNCERTAIN",
+        "condition_a": "UNCERTAIN",
+        "disposition_a": "pending_review",
+        "identity_b": "UNCERTAIN",
+        "completeness_b": "UNCERTAIN",
+        "condition_b": "UNCERTAIN",
+        "disposition_b": "pending_review"
+      },
+      "record": {
+        "record_id": "RTN-EE5D1406",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_bravo",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-036",
+        "captured_at": "2026-09-30T18:50:54.388986+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/test_closed_box.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.9,
+            "detail": "Only a closed plain shipping carton is visible, so the puzzle itself cannot be seen.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 8104
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.9,
+            "detail": "The puzzle pieces and poster could be inside the closed carton, which is not factory-sealed retail packaging.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 8104
+          },
+          {
+            "check_key": "condition",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.85,
+            "detail": "Not gradable (observed: uncertain). The item is hidden inside the shipping box, and the box's minor scuffs and small puncture do not show the product's condition.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 8104
+          }
+        ],
+        "outcome": "pending_review",
+        "overrides": [],
+        "status": "pending",
+        "content_hash": "e52bf3e8a07594a532db874147d244d0001530d2b52280929a96356ff8eda288"
+      },
+      "verdicts": {
+        "identity": "UNCERTAIN",
+        "completeness": "UNCERTAIN",
+        "condition": "UNCERTAIN"
+      },
+      "disposition": "pending_review",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2947,
+        "output_tokens": 339,
+        "cost_usd": 0.01857,
+        "cached": false,
+        "latency_ms": 8104
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-037",
+        "org_id": "org_demo_bravo",
+        "ordered_sku": "SKU-PUZZLE-500",
+        "parts_list": "puzzle pieces;poster",
+        "photo_refs": "eval/images/test_damaged_puzzle.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "FAIL",
+        "disposition_a": "dispose",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "FAIL",
+        "disposition_b": "dispose"
+      },
+      "record": {
+        "record_id": "RTN-4A1135C6",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_bravo",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-037",
+        "captured_at": "2026-09-30T18:50:54.395769+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/test_damaged_puzzle.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "FAIL",
+            "confidence": 0.85,
+            "detail": "The box is clearly marked 1000 pieces, contradicting the catalogue's 500-piece puzzle.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.4,
+            "detail": "Loose pieces are visible, but the piece count and the presence of a reference poster cannot be verified from the photo.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6
+          },
+          {
+            "check_key": "condition",
+            "verdict": "FAIL",
+            "confidence": 0.9,
+            "detail": "Unacceptable (observed: damaged). The box is crushed and ripped open with a torn lid, and the pieces are worn and scattered with debris.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6
+          }
+        ],
+        "outcome": "pending_review",
+        "overrides": [],
+        "status": "pending",
+        "content_hash": "1feb765036a94f0230eafc014ca83d28c64df2dcf0995e2332cbbe6b1a480b6d"
+      },
+      "verdicts": {
+        "identity": "FAIL",
+        "completeness": "UNCERTAIN",
+        "condition": "FAIL"
+      },
+      "disposition": "pending_review",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2947,
+        "output_tokens": 343,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 6
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-038",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/eval_001_bottle_new_complete.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "restock",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "restock"
+      },
+      "record": {
+        "record_id": "RTN-BF24E8C9",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-038",
+        "captured_at": "2026-09-30T18:50:54.402276+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_001_bottle_new_complete.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.93,
+            "detail": "The bottle is stainless steel with a screw-on lid and is printed '750ml insulated stainless steel bottle', matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.92,
+            "detail": "Both the bottle and the black screw-on lid are present and attached.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Like New (observed: opened_unused). The bottle is out of its packaging with a clean brushed finish and shows no visible scratches, dents or dirt.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6
+          }
+        ],
+        "outcome": "restock",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "2749ce2f8d21bf45a7d8a36c3f59a04af4e504daf73862405dea68dc3f3c2dbf"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "restock",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 307,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 6
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-039",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/eval_003_bottle_damaged_unacceptable.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "FAIL",
+        "disposition_a": "dispose",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "FAIL",
+        "disposition_b": "dispose"
+      },
+      "record": {
+        "record_id": "RTN-3F7ACCBF",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-039",
+        "captured_at": "2026-09-30T18:50:54.416866+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_003_bottle_damaged_unacceptable.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The item is a stainless-steel bottle marked 750ml with a lid, matching the catalogue description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 14
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "Both the bottle and the black lid are present, with the lid fitted on the neck.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 14
+          },
+          {
+            "check_key": "condition",
+            "verdict": "FAIL",
+            "confidence": 0.95,
+            "detail": "Unacceptable (observed: damaged). The bottle body is heavily crushed and deeply dented with extensive scratches, and the lid appears deformed.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 14
+          }
+        ],
+        "outcome": "dispose",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "33b657ce6e0f0319466bb7003b1bc47a59263956f63d0cbdc74d30cc4e4e34b7"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "FAIL"
+      },
+      "disposition": "dispose",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 319,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 14
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-040",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/eval_004_bottle_used_good.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-9686E7DB",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-040",
+        "captured_at": "2026-09-30T18:50:54.421947+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_004_bottle_used_good.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "The item is a stainless-steel bottle with a screw-on lid and is roughly 750 ml in size, matching the description; insulation cannot be confirmed from the photo.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 5
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "Both the bottle and the black screw-on lid are present and attached.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 5
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "Used - Good (observed: signs_of_use). The bottle body has visible light scratches and scuffs across its surface but no dents or breakage.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 5
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "177dee16e5768fb1f6dda59e29e81a04c77cc5b012a7828f8b7052a509196e20"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 317,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 5
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-041",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/eval_005_plain_brown_carton.jpg",
+        "identity_a": "UNCERTAIN",
+        "completeness_a": "UNCERTAIN",
+        "condition_a": "UNCERTAIN",
+        "disposition_a": "pending_review",
+        "identity_b": "UNCERTAIN",
+        "completeness_b": "UNCERTAIN",
+        "condition_b": "UNCERTAIN",
+        "disposition_b": "pending_review"
+      },
+      "record": {
+        "record_id": "RTN-404FEE0F",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-041",
+        "captured_at": "2026-09-30T18:50:54.432367+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_005_plain_brown_carton.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.9,
+            "detail": "Only a closed plain shipping carton is visible, so the bottle itself cannot be checked against the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.9,
+            "detail": "The bottle and lid could be inside the taped carton, which is not factory-sealed retail packaging.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "condition",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.9,
+            "detail": "Not gradable (observed: uncertain). The item is not visible, and the creases on the outer carton say nothing reliable about the bottle's condition.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          }
+        ],
+        "outcome": "pending_review",
+        "overrides": [],
+        "status": "pending",
+        "content_hash": "b6aeeb9afdf3bac7140605bca16ff9c6e4474e7d50de472e1d1a915e3e7ccd09"
+      },
+      "verdicts": {
+        "identity": "UNCERTAIN",
+        "completeness": "UNCERTAIN",
+        "condition": "UNCERTAIN"
+      },
+      "disposition": "pending_review",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 340,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 10
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-042",
+        "org_id": "org_demo_bravo",
+        "ordered_sku": "SKU-PUZZLE-500",
+        "parts_list": "puzzle pieces;poster",
+        "photo_refs": "eval/images/eval_007_puzzle_missing_poster.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "FAIL",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "UNCERTAIN",
+        "condition_b": "PASS",
+        "disposition_b": "pending_review"
+      },
+      "record": {
+        "record_id": "RTN-AB086ACD",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_bravo",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-042",
+        "captured_at": "2026-09-30T18:50:54.443853+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_007_puzzle_missing_poster.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.93,
+            "detail": "The box is labelled as a 500-piece jigsaw puzzle and contains puzzle pieces, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.55,
+            "detail": "No poster is visible in the open box, but a folded poster could be hidden under the pieces or in the lid, and the tag's note is not photo evidence.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.7,
+            "detail": "Used - Like New (observed: opened_unused). The box is opened and the pieces are loose, but neither the box nor the pieces show visible damage or wear.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 11
+          }
+        ],
+        "outcome": "pending_review",
+        "overrides": [],
+        "status": "pending",
+        "content_hash": "b38497483769a1a6d2892881183762dad3ccae82f92472ee5d315472afd43244"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "UNCERTAIN",
+        "condition": "PASS"
+      },
+      "disposition": "pending_review",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2947,
+        "output_tokens": 347,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 11
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-043",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-CABLE-USBC",
+        "parts_list": "cable",
+        "photo_refs": "eval/images/eval_008_usbc_cable_good.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-BDDBF318",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-043",
+        "captured_at": "2026-09-30T18:50:54.456382+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_008_usbc_cable_good.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.93,
+            "detail": "Both ends are USB-C plugs on a charging-style cable, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 12
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.92,
+            "detail": "The only expected part, the cable, is fully visible with both connectors present.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 12
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.75,
+            "detail": "Used - Good (observed: signs_of_use). Visible fraying of the braid just below the left connector's strain relief plus light lint indicate use, but the cable is not broken.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 12
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "64a16b7af90041a3dc146069f09a7b28b0058eec056406e856e2eeb5ef696ac7"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2928,
+        "output_tokens": 291,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 12
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-044",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-CABLE-USBC",
+        "parts_list": "cable",
+        "photo_refs": "eval/images/eval_009_usbc_cable_frayed.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "FAIL",
+        "disposition_a": "dispose",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "FAIL",
+        "disposition_b": "dispose"
+      },
+      "record": {
+        "record_id": "RTN-5C13AE5A",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-044",
+        "captured_at": "2026-09-30T18:50:54.462596+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_009_usbc_cable_frayed.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "A USB-C connector on a braided cable matches the USB-C charging cable description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "The only expected part, the cable, is present with its USB-C end visible.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6
+          },
+          {
+            "check_key": "condition",
+            "verdict": "FAIL",
+            "confidence": 0.95,
+            "detail": "Unacceptable (observed: damaged). The jacket is ripped open at the connector, exposing the internal wires, and the housing is scratched.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 6
+          }
+        ],
+        "outcome": "dispose",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "924444227dd937a591721af801f39a12097d204146a8b0c04660bedf73a6c1c4"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "FAIL"
+      },
+      "disposition": "dispose",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2928,
+        "output_tokens": 283,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 6
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-045",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-LAMP-LED",
+        "parts_list": "lamp;usb cable;manual",
+        "photo_refs": "eval/images/eval_010_led_lamp_complete.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-C89FFF66",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-045",
+        "captured_at": "2026-09-30T18:50:54.476032+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_010_led_lamp_complete.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The item is an LED desk lamp with a light panel head, gooseneck, arm and touch base, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 13
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The lamp, USB power cable and printed manual are all visible on the table.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 13
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.75,
+            "detail": "Used - Good (observed: signs_of_use). The lamp base and head show visible dust, smudges and light scuffs but no breakage.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 13
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "0631d969bba14efe085bcfb3aa6caf42da57ef4a3f3bd141ea1973b22f172a76"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2946,
+        "output_tokens": 315,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 13
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-046",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-LAMP-LED",
+        "parts_list": "lamp;usb cable;manual",
+        "photo_refs": "eval/images/eval_011_led_lamp_no_manual.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "FAIL",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "FAIL",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-5C8C5FA8",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-046",
+        "captured_at": "2026-09-30T18:50:54.482006+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_011_led_lamp_no_manual.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The item is an LED desk lamp with a USB cable, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 5
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "FAIL",
+            "confidence": 0.75,
+            "detail": "The lamp and USB cable are laid out in the open, but no printed manual appears anywhere in the photo. Missing: manual.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 5
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Like New (observed: opened_unused). The lamp and cable look clean with no visible scratches or damage; the scuffs are on the workbench, not the item.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 5
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "c8847781767c139ac436182fc12ab1e9f9078fe0cc001d062f190543495e9486"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "FAIL",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2946,
+        "output_tokens": 297,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 5
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-047",
+        "org_id": "org_demo_bravo",
+        "ordered_sku": "SKU-LEASH-6FT",
+        "parts_list": "leash",
+        "photo_refs": "eval/images/eval_012_dog_leash_good.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-1B4C668F",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_bravo",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-047",
+        "captured_at": "2026-09-30T18:50:54.492669+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_012_dog_leash_good.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "The item is a webbing dog leash with a handle loop and snap hook, and its coiled length is consistent with about 6 ft.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The whole leash is visible, with its handle loop, webbing and snap hook all present.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Good (observed: signs_of_use). The webbing shows visible fuzzing and frayed edges and the hook is tarnished, but the leash appears intact and functional.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 10
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "db73e6da2fc11297bf3112d02048ea061cd1a10417c684d284787e5ce7869aef"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2929,
+        "output_tokens": 334,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 10
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-048",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-CANDLE-3",
+        "parts_list": "candle x3;gift box",
+        "photo_refs": "eval/images/eval_013_candles_complete.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "PASS",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "PASS",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-23BC7106",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-048",
+        "captured_at": "2026-09-30T18:50:54.508035+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_013_candles_complete.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.95,
+            "detail": "The item is a set of three scented jar candles in a branded gift box, matching the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 15
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "PASS",
+            "confidence": 0.93,
+            "detail": "All three candles are seated in the insert and the gift box with its lid is present.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 15
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Acceptable (observed: signs_of_use). All three candles have been burned, with charred wicks, melted wax and soot on the jars, and the box lid is creased and scuffed, though the candles remain usable.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 15
+          }
+        ],
+        "outcome": "liquidate",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "925ab6792045115a738143335f14d02a732253f0c5da0a428e908c2f82a47a98"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "PASS",
+        "condition": "PASS"
+      },
+      "disposition": "liquidate",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2942,
+        "output_tokens": 362,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 15
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-049",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-CABLE-USBC",
+        "parts_list": "cable",
+        "photo_refs": "eval/images/test_abc.jpg",
+        "identity_a": "UNCERTAIN",
+        "completeness_a": "UNCERTAIN",
+        "condition_a": "UNCERTAIN",
+        "disposition_a": "pending_review",
+        "identity_b": "UNCERTAIN",
+        "completeness_b": "UNCERTAIN",
+        "condition_b": "UNCERTAIN",
+        "disposition_b": "pending_review"
+      },
+      "record": {
+        "record_id": "RTN-57F72694",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-049",
+        "captured_at": "2026-09-30T18:50:58.938450+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/test_abc.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "FAIL",
+            "confidence": 0.95,
+            "detail": "The item returned is a blue insulated water bottle, not a USB-C charging cable.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 4430
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "FAIL",
+            "confidence": 0.8,
+            "detail": "No USB-C cable is visible in the box; only a water bottle and packing paper are present. Missing: cable.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 4430
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.6,
+            "detail": "Used - Good (observed: signs_of_use). The returned bottle shows light scuffs and speckled wear on its blue finish but is intact.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 4430
+          }
+        ],
+        "outcome": "pending_review",
+        "overrides": [],
+        "status": "pending",
+        "content_hash": "1364558b50a9344916b69fa6240163f1aacadb66d15d57293d37290b519deb10"
+      },
+      "verdicts": {
+        "identity": "FAIL",
+        "completeness": "FAIL",
+        "condition": "PASS"
+      },
+      "disposition": "pending_review",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2928,
+        "output_tokens": 291,
+        "cost_usd": 0.01753,
+        "cached": false,
+        "latency_ms": 4430
+      }
+    },
+    {
+      "unit": {
+        "unit_id": "EVAL-050",
+        "org_id": "org_demo_alpha",
+        "ordered_sku": "SKU-BOTTLE-750",
+        "parts_list": "bottle;lid",
+        "photo_refs": "eval/images/eval_002_bottle_missing_lid.jpg",
+        "identity_a": "PASS",
+        "completeness_a": "FAIL",
+        "condition_a": "PASS",
+        "disposition_a": "refurbish",
+        "identity_b": "PASS",
+        "completeness_b": "FAIL",
+        "condition_b": "PASS",
+        "disposition_b": "refurbish"
+      },
+      "record": {
+        "record_id": "RTN-E71883EC",
+        "schema_version": "1.0",
+        "organization_id": "org_demo_alpha",
+        "client_id": "returns-manager-agent",
+        "agent": "Returns Manager Agent",
+        "subject": "EVAL-050",
+        "captured_at": "2026-09-30T18:50:58.950820+00:00",
+        "operator_label": "op_eval",
+        "images": [
+          "eval/images/eval_002_bottle_missing_lid.jpg"
+        ],
+        "checks": [
+          {
+            "check_key": "identity",
+            "verdict": "PASS",
+            "confidence": 0.85,
+            "detail": "The item is a stainless-steel bottle with a threaded neck, and its label reads 750ml, matching the insulated 750 ml screw-lid bottle in the description.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 12
+          },
+          {
+            "check_key": "completeness",
+            "verdict": "FAIL",
+            "confidence": 0.95,
+            "detail": "The bottle neck shows exposed screw threads and no lid is present anywhere in the photo. Missing: lid.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 12
+          },
+          {
+            "check_key": "condition",
+            "verdict": "PASS",
+            "confidence": 0.8,
+            "detail": "Used - Good (observed: signs_of_use). The body shows visible use, with numerous light scratches and dark scuff marks, but no dents or breakage.",
+            "model_version": "claude-opus-5-5",
+            "latency_ms": 12
+          }
+        ],
+        "outcome": "refurbish",
+        "overrides": [],
+        "status": "completed",
+        "content_hash": "3053b72d2929ba0b8fce1275825ae1b2e9ab6e58b0169498a014442bc5883d71"
+      },
+      "verdicts": {
+        "identity": "PASS",
+        "completeness": "FAIL",
+        "condition": "PASS"
+      },
+      "disposition": "refurbish",
+      "usage": {
+        "model": "claude-opus-5-5",
+        "input_tokens": 2949,
+        "output_tokens": 393,
+        "cost_usd": 0.0,
+        "cached": true,
+        "latency_ms": 12
+      }
+    }
+  ]
+}
