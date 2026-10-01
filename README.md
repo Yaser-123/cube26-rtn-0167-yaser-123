@@ -229,12 +229,12 @@ Deployment URL: https://returns-manager-390y.onrender.com
 | README.md / ARCHITECTURE.md complete | ✅ |
 | Evaluation completed (50 units, 2 labellers) | ✅ `eval/eval-report.md` · identity 88% · completeness 87.5% · condition 96% · FP=0 |
 | Failure modes documented | ✅ 3 patterns identified in `eval/eval-report.md` |
-| Demo video | ⏳ script in `docs/DEMO_SCRIPT.md` |
+| Demo video | ✅ https://youtu.be/Qd7Z2MgsjHk |
 | Deployment URL | ✅ https://returns-manager-390y.onrender.com |
-| LinkedIn post tagging CodeQuesters and Sydon.AI | ⏳ draft in `docs/LINKEDIN_POST.md` |
+| LinkedIn post tagging CodeQuesters and Sydon.AI | ✅ https://lnkd.in/p/dzKbD3Ct |
 
 ## Video Demo
-[Link to Demo Video (Placeholder) - Loom / YouTube]
+[Watch Demo on YouTube](https://youtu.be/Qd7Z2MgsjHk)
 
 ## LinkedIn Post
-[Link to LinkedIn Post tagging CodeQuesters and Sydon.AI (Placeholder)]
+[View LinkedIn Post](https://lnkd.in/p/dzKbD3Ct)
