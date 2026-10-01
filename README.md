@@ -11,20 +11,52 @@ The output is an **Evidence Record** in the official contract shape, for the Rec
 
 ## How it works
 
-```text
-Photos (≤3) + ordered SKU + parts list
-        │
-        ▼
-  One vision call to Claude (claude-opus-5-5), structured JSON output
-  → identity / completeness / condition, each PASS | FAIL | UNCERTAIN + confidence + detail
-        │
-        ▼
-  Deterministic disposition policy in code (src/agent.py: decide_disposition)
-        │
-        ▼
-  Evidence Record: record_id, schema_version, organization_id, client_id, agent,
-  subject, captured_at, operator_label, images, checks[], outcome, overrides[],
-  status, content_hash
+```mermaid
+flowchart TD
+    A["📷 Photos ≤3\n+ Ordered SKU\n+ Parts List"]:::input
+
+    subgraph AI ["🤖 Claude Vision — One API Call"]
+        B["Identity Check\nPASS | FAIL | UNCERTAIN\n+ confidence + detail"]:::check
+        C["Completeness Check\nPASS | FAIL | UNCERTAIN\n+ confidence + detail"]:::check
+        D["Condition Check\nAmazon Scale\n+ confidence + detail"]:::check
+    end
+
+    subgraph POLICY ["⚙️ Deterministic Code — decide_disposition()"]
+        E{"Any UNCERTAIN?"}:::decision
+        F{"Identity FAIL?"}:::decision
+        G{"Condition\nUnacceptable?"}:::decision
+        H{"Parts\nMissing?"}:::decision
+    end
+
+    R1["🟢 restock"]:::outcome
+    R2["🔵 refurbish"]:::outcome
+    R3["🟡 liquidate"]:::outcome
+    R4["🔴 dispose"]:::outcome
+    R5["⚪ pending_review\n(human review)"]:::outcome
+
+    OUT["📋 Evidence Record\nrecord_id · schema_version · org_id\nchecks[] · outcome · overrides[]\ncontent_hash (SHA-256)"]:::record
+
+    A --> AI
+    AI --> POLICY
+    E -->|Yes| R5
+    E -->|No| F
+    F -->|Yes| R5
+    F -->|No| G
+    G -->|Yes| R4
+    G -->|No| H
+    H -->|Yes, Used-Acceptable| R3
+    H -->|Yes, otherwise| R2
+    H -->|No, New/Like New| R1
+    H -->|No, Very Good/Good| R2
+    H -->|No, Acceptable| R3
+
+    R1 & R2 & R3 & R4 & R5 --> OUT
+
+    classDef input fill:#6366f1,stroke:#4f46e5,color:#fff,rx:8
+    classDef check fill:#1e293b,stroke:#334155,color:#e2e8f0
+    classDef decision fill:#92400e,stroke:#b45309,color:#fff
+    classDef outcome fill:#0f172a,stroke:#475569,color:#e2e8f0
+    classDef record fill:#064e3b,stroke:#065f46,color:#d1fae5
 ```
 
 The model grades and the code decides. The disposition is never left to the model's discretion.
