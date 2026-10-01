@@ -222,6 +222,29 @@ Cost was about $0.018 per image (roughly 2.8k input and 300 output tokens), with
 
 Failure mode found during development: before the catalogue descriptions were added, identity came back UNCERTAIN for every unbranded item, because the SKU code alone doesn't say what the product is. The fix was to pass the seller catalogue description with the SKU.
 
+## Assumptions & Limitations
+
+### Assumptions
+
+| Assumption | Rationale |
+|---|---|
+| One photo is usually sufficient for grading | The eval bears this out: most units were decided from a single front-facing image. The system accepts up to 3 for cases where one angle is ambiguous. |
+| The operator has physically opened the parcel before inspection | The agent cannot grade condition through packaging. A closed box always returns `UNCERTAIN` — which is the correct and safe outcome. |
+| The seller catalogue (`src/catalog.py`) is the authoritative identity reference | The model judges identity against the catalogue description, not the SKU code alone. An unbranded item with no catalogue entry cannot pass identity. |
+| Disposition policy is our own, not Amazon's | The policy table is derived from the problem statement and sample data patterns. It is documented and tested but is not a published Amazon rule. |
+| The sample data (`data/returns_sample.csv`) is synthetic | It is used for engineering and evaluation only — not as an authoritative source for condition definitions or disposition rules. |
+
+### Limitations
+
+| Limitation | Impact | Mitigation |
+|---|---|---|
+| **In-memory record store** | Records lost on server restart / Render redeploy | Acceptable for hackathon. Production: Postgres with row-level security per org. |
+| **No real authentication on operator UI** | `x-org-id` header is self-reported, not verified | Daily budget cap still limits abuse. Production: derive tenant from signed auth token. |
+| **Images sent as base64 JSON** | Higher request payload size than multipart | Images are resized to 1024px before encoding. Production: presigned object-store uploads. |
+| **Condition definitions paraphrased** | May not match Amazon's live Condition Guidelines exactly | Definitions should be re-verified against Amazon Seller Central per category before production use. |
+| **Free-tier Render disk is ephemeral** | Eval labels and new account data reset on redeploy | Run labelling and eval locally; deploy only the core agent. |
+| **`content_hash` detects changes but does not prove tamper-resistance** | Not signed or anchored to an external ledger | Stated explicitly in docs. Production would add a signing step. |
+
 ## Findings (contradictions in the reference data)
 
 From `data/returns_sample.csv` (synthetic):
