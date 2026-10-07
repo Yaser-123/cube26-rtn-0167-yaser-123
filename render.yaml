@@ -12,7 +12,7 @@ services:
       - key: ANTHROPIC_WORKSPACE_ID
         sync: false
       - key: RTN_MODEL
-        value: claude-opus-5-5
+        value: gemini:gemma-4-26b-a4b-it
       - key: RTN_EFFORT
         value: low
       - key: RTN_API_KEYS
