@@ -64,11 +64,14 @@ Condition: grade on Amazon's condition scale.
 - Unacceptable: broken, crushed, or heavily damaged.
 Condition verdict is FAIL only for Unacceptable, UNCERTAIN if you cannot see the item well enough to grade it. Assume hidden sides of a clearly visible item are fine.
 
-Confidences are 0-1 and reflect how clearly the photos support each verdict. Details are one short sentence citing what you saw."""
+Confidences are 0-1 and reflect how clearly the photos support each verdict. Details are one short sentence citing what you saw.
+
+CRITICAL INSTRUCTION: You must think step-by-step. Use the 'reasoning' field FIRST to analyse the image, identify the item, check for all expected parts, and assess the condition before you output any PASS/FAIL verdicts."""
 
 RESULT_SCHEMA = {
     "type": "object",
     "properties": {
+        "reasoning": {"type": "string", "description": "Step-by-step analysis of the item, its parts, and condition."},
         "observed": {"type": "string", "description": "What is literally visible in the photos"},
         "observed_state": {"type": "string", "enum": OBSERVED_STATES},
         "identity_verdict": {"type": "string", "enum": VERDICTS},
@@ -84,7 +87,7 @@ RESULT_SCHEMA = {
         "condition_detail": {"type": "string"},
     },
     "required": [
-        "observed", "observed_state",
+        "reasoning", "observed", "observed_state",
         "identity_verdict", "identity_confidence", "identity_detail",
         "completeness_verdict", "parts_missing", "completeness_confidence", "completeness_detail",
         "condition_verdict", "condition_grade", "condition_confidence", "condition_detail",
@@ -160,16 +163,30 @@ class ReturnsAgent:
         return h.hexdigest()
 
     def _call_model(self, images, request):
+        if MODEL.startswith("gemini:"):
+            return self._call_gemini(images, request, MODEL.split(":", 1)[1])
+        
+        if MODEL.startswith("ollama:"):
+            try:
+                return self._call_ollama(images, request)
+            except Exception as e:
+                print(f"Ollama failed ({e}). Falling back to Gemini API.")
+                return self._call_gemini(images, request, "gemma-4-26b-a4b-it")
+
         content = [
             {"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": data}}
             for data in images
         ]
         asin = f" (ASIN {request.ordered_asin})" if request.ordered_asin else ""
         description = CATALOG.get(request.ordered_sku, "not in catalogue; judge from the SKU name")
+        prompt_text = f"Ordered SKU: {request.ordered_sku}{asin}\nCatalogue description: {description}\nExpected parts: {request.parts_list}\n"
+        if getattr(request, "operator_observations", None):
+            prompt_text += f"Operator observations: {request.operator_observations}\n"
+        prompt_text += "\nInspect this return."
+        
         content.append({
             "type": "text",
-            "text": f"Ordered SKU: {request.ordered_sku}{asin}\nCatalogue description: {description}\n"
-                    f"Expected parts: {request.parts_list}\n\nInspect this return.",
+            "text": prompt_text,
         })
         response = self.client.beta.messages.create(
             model=MODEL,
@@ -197,6 +214,150 @@ class ReturnsAgent:
             "cached": False,
         }
         return json.loads(text), usage
+
+    def _call_ollama(self, images, request):
+        import urllib.request
+        ollama_model = MODEL.split(":", 1)[1]
+        asin = f" (ASIN {request.ordered_asin})" if request.ordered_asin else ""
+        description = CATALOG.get(request.ordered_sku, "not in catalogue; judge from the SKU name")
+        
+        prompt = (
+            f"{SYSTEM_PROMPT}\n\n"
+            f"Ordered SKU: {request.ordered_sku}{asin}\n"
+            f"Catalogue description: {description}\n"
+            f"Expected parts: {request.parts_list}\n"
+        )
+        if getattr(request, "operator_observations", None):
+            prompt += f"Operator observations: {request.operator_observations}\n"
+        
+        prompt += (
+            f"\nInspect this return. You must reply with ONLY a valid JSON object matching this schema:\n"
+            f"{json.dumps(RESULT_SCHEMA, indent=2)}"
+        )
+        
+        payload = json.dumps({
+            "model": ollama_model,
+            "prompt": prompt,
+            "images": images,
+            "stream": False,
+            "format": "json",
+            "options": {"num_ctx": 4096, "temperature": 0.0}
+        }).encode()
+        
+        req = urllib.request.Request(
+            "http://localhost:11434/api/generate",
+            data=payload,
+            headers={"Content-Type": "application/json"}
+        )
+        with urllib.request.urlopen(req, timeout=120) as r:
+            resp = json.loads(r.read())
+            
+        text = resp["response"]
+        
+        try:
+            result = json.loads(text)
+        except json.JSONDecodeError:
+            raise RuntimeError(f"Ollama returned invalid JSON: {text}")
+            
+        # Ensure all required keys exist (basic fallback)
+        for key in RESULT_SCHEMA["required"]:
+            if key not in result:
+                if "verdict" in key: result[key] = "UNCERTAIN"
+                elif "confidence" in key: result[key] = 0.0
+                elif "detail" in key: result[key] = "Ollama model failed to provide this field."
+                elif "parts_missing" in key: result[key] = []
+                elif "observed" in key: result[key] = "Unknown"
+                elif "observed_state" in key: result[key] = "uncertain"
+                elif "condition_grade" in key: result[key] = "Not gradable"
+                elif "reasoning" in key: result[key] = "No reasoning provided."
+
+        # Sanitize verdicts as small models occasionally hallucinate enum values
+        for v_key in ["identity_verdict", "completeness_verdict", "condition_verdict"]:
+            if result.get(v_key) not in ["PASS", "FAIL", "UNCERTAIN"]:
+                result[v_key] = "UNCERTAIN"
+
+        usage = {
+            "model": ollama_model,
+            "input_tokens": resp.get("prompt_eval_count", 0),
+            "output_tokens": resp.get("eval_count", 0),
+            "cost_usd": 0.0,
+            "cached": False,
+        }
+        return result, usage
+
+    def _call_gemini(self, images, request, gemini_model_name):
+        import urllib.request
+        
+        asin = f" (ASIN {request.ordered_asin})" if request.ordered_asin else ""
+        description = CATALOG.get(request.ordered_sku, "not in catalogue; judge from the SKU name")
+        
+        prompt = (
+            f"{SYSTEM_PROMPT}\n\n"
+            f"Ordered SKU: {request.ordered_sku}{asin}\n"
+            f"Catalogue description: {description}\n"
+            f"Expected parts: {request.parts_list}\n"
+        )
+        if getattr(request, "operator_observations", None):
+            prompt += f"Operator observations: {request.operator_observations}\n"
+            
+        prompt += f"\nInspect this return."
+        
+        parts = []
+        for img_data in images:
+            parts.append({
+                "inline_data": {
+                    "mime_type": "image/jpeg",
+                    "data": img_data
+                }
+            })
+        parts.append({"text": prompt})
+        
+        # Convert schema to dict for Gemini
+        schema_dict = dict(RESULT_SCHEMA)
+        if "additionalProperties" in schema_dict:
+            del schema_dict["additionalProperties"]
+            
+        payload = json.dumps({
+            "contents": [{"parts": parts}],
+            "generationConfig": {
+                "responseMimeType": "application/json",
+                "responseSchema": schema_dict,
+                "temperature": 0.0
+            }
+        }).encode("utf-8")
+        
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            raise RuntimeError("GEMINI_API_KEY is missing")
+            
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{gemini_model_name}:generateContent?key={api_key}"
+        
+        req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+        try:
+            with urllib.request.urlopen(req, timeout=120) as r:
+                resp = json.loads(r.read())
+        except urllib.error.HTTPError as e:
+            error_msg = e.read().decode()
+            raise RuntimeError(f"Gemini API HTTP Error {e.code}: {error_msg}")
+        except Exception as e:
+            raise RuntimeError(f"Gemini API request failed: {e}")
+            
+        text = resp["candidates"][0]["content"]["parts"][0]["text"]
+        result = json.loads(text)
+        
+        # Sanitize verdicts as small models occasionally hallucinate enum values
+        for v_key in ["identity_verdict", "completeness_verdict", "condition_verdict"]:
+            if result.get(v_key) not in ["PASS", "FAIL", "UNCERTAIN"]:
+                result[v_key] = "UNCERTAIN"
+                
+        usage = {
+            "model": f"gemini:{gemini_model_name}",
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0, # Free tier assumed
+            "cached": False,
+        }
+        return result, usage
 
     def _get_result(self, images, request):
         """One batched model call for all three checks, memoised on disk so identical re-submissions cost nothing."""

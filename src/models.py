@@ -16,6 +16,7 @@ class ReturnCaptureRequest(BaseModel):
     parts_list: str = Field(min_length=1)
     # Local file paths or data: URLs (browser uploads). Empty is accepted and fails open to review.
     photo_refs: List[str] = Field(max_length=10)
+    operator_observations: Optional[str] = None
 
 
 class OverrideRequest(BaseModel):
